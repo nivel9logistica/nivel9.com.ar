@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nivel 9 | Logística de Evolución y Mudanzas Nacionales</title>
+  <meta name="description" content="Transporte corporativo y traslados particulares desde Córdoba a todo el país. Tecnología, flota propia y trazabilidad." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVEGACIÓN SUPERIOR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <!-- Reemplazar src por tu logo oficial -->
+        <img src="assets/logo.png" alt="Nivel 9" class="brand-logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';" />
+        <span id="logo-fallback" class="brand-fallback">NIVEL <span>9</span></span>
+      </a>
+
+      <nav class="nav-menu">
+        <button class="nav-link" data-tab-target="mudanzas">Mudanzas</button>
+        <button class="nav-link" data-tab-target="corporativo">Corporativo B2B</button>
+        <button class="nav-link" data-tab-target="larga-distancia">Larga Distancia</button>
+        <a id="btn-header-cotizador" href="#" class="nav-link special" target="_blank">Autocotizador</a>
+      </nav>
+
+      <a id="btn-header-wsp" href="#" class="btn-primary" target="_blank">
+        <span>COTIZAR POR WHATSAPP</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- PANTALLA PRINCIPAL / HERO -->
+  <main class="hero-section">
+    <div class="hero-container">
+      
+      <!-- Lado Izquierdo: Mensaje de Impacto -->
+      <div class="hero-content">
+        <div class="hero-badge">OPERACIONES LOGÍSTICAS NACIONALES</div>
+        <h1 class="hero-title">
+          NIVEL <span class="accent-color">9</span><br />
+          LOGÍSTICA DE<br />
+          <span class="gradient-text">EVOLUCIÓN.</span>
+        </h1>
+        <p class="hero-subtitle">
+          El transporte inteligente que tu negocio y tu vida necesitan. Flota monitoreada, respuestas inmediatas y cobertura integral desde Córdoba a todo el país.
+        </p>
+
+        <div class="hero-actions">
+          <a id="btn-hero-cotizar" href="#" class="btn-orange" target="_blank">[ COTIZAR MUDANZA ]</a>
+          <a id="btn-hero-portal" href="#" class="btn-outline" target="_blank">[ PORTAL CARGAS / B2B ]</a>
+        </div>
+      </div>
+
+      <!-- Lado Derecho: Ventana de Anfitrión Virtual IA -->
+      <div class="hero-media">
+        <div class="ai-window">
+          <div class="ai-header">
+            <span class="pulse-dot"></span>
+            <span class="ai-label">VIDEO IA / ANFITRIÓN VIRTUAL</span>
+          </div>
+
+          <div class="ai-screen">
+            <!-- Video en loop o tu cápsula de video de bienvenida -->
+            <video id="ai-host-video" playsinline muted loop autoplay poster="assets/img/mudanza.jpg">
+              <source src="assets/anfitrion.mp4" type="video/mp4" />
+            </video>
+            
+            <div class="ai-overlay">
+              <div class="audio-waves">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <p class="ai-caption" id="ai-caption-text">"Hola, te doy la bienvenida a Nivel 9. Conocé nuestra logística..."</p>
+              <button id="toggle-audio-btn" class="ai-control-btn">🔊 Activar audio</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- CENTRO DE CONTROL: VENTANAS DE SERVICIOS (SIN SCROLL INFINITO) -->
+  <section class="control-center">
+    <div class="section-header">
+      <div class="section-tag">SISTEMA INTEGRADO</div>
+      <h2 class="section-title">Ventanas de Servicios</h2>
+      <p class="section-desc">Seleccioná una división para cargar sus datos operativos y cotización directa.</p>
+    </div>
+
+    <!-- Pestañas de Intercambio Inmediato -->
+    <div class="tabs-bar">
+      <button class="tab-btn active" data-tab="mudanzas">[ 01 MUDANZAS ]</button>
+      <button class="tab-btn" data-tab="corporativo">[ 02 CORPORATIVO ]</button>
+      <button class="tab-btn" data-tab="larga-distancia">[ 03 LARGA DISTANCIA ]</button>
+    </div>
+
+    <!-- Tarjeta Dinámica Renderizada por JS -->
+    <div class="display-stage" id="service-stage">
+      <!-- Se inyecta dinámicamente vía motor.js -->
+    </div>
+  </section>
+
+  <!-- FOOTER FORMAL -->
+  <footer class="corporate-footer">
+    <div class="footer-container">
+      <div class="footer-info">
+        <h3>NIVEL <span>9</span> S.A.S.</h3>
+        <p>Logística de Excelencia | CUIT: 30-71926083-3</p>
+        <p>Base Operativa: Lino Spilimbergo 7100, Los Boulevares, Córdoba.</p>
+      </div>
+      <div class="footer-links">
+        <a id="footer-link-portal" href="#" target="_blank">Portal Público</a>
+        <a id="footer-link-cotizador" href="#" target="_blank">Autocotizador</a>
+        <a id="footer-link-wsp" href="#" target="_blank">Guardia Operativa</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Nivel 9 S.A.S. Todos los derechos reservados. Operaciones Córdoba & Cobertura Federal.</p>
+    </div>
+  </footer>
+
+  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+  <a id="floating-wsp" href="#" class="floating-wsp" target="_blank" title="Contactar asesor">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24z"/></svg>
+  </a>
+
+  <!-- SCRIPTS -->
+  <script src="js/config.js"></script>
+  <script src="js/motor.js"></script>
+</body>
+</html>

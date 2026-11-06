@@ -9,12 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet" />
-  <!-- Supabase CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-  <!-- ENGRANAJE DISCRETO DE GESTIÓN (ADMIN) -->
+  <!-- ENGRANAJE DISCRETO DE GESTIÓN (ADMIN / 2468) -->
   <button id="admin-gear-btn" class="admin-gear" title="Administración">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <circle cx="12" cy="12" r="3"></circle>
@@ -26,12 +24,11 @@
   <header class="navbar">
     <div class="nav-container">
       <a href="#" class="brand">
-        <img src="./assets/logo.png" alt="NIVEL 9" class="brand-logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';" />
-        <span id="logo-fallback" class="brand-fallback">NIVEL <span>9</span></span>
+        <span class="brand-text">NIVEL <span>9</span></span>
       </a>
 
-      <!-- Menú 50% más grande -->
-      <nav class="nav-menu" id="dynamic-nav-menu">
+      <!-- Menú superior 50% más grande -->
+      <nav class="nav-menu">
         <button class="nav-link" data-tab-target="mudanzas">Mudanzas</button>
         <button class="nav-link" data-tab-target="corporativo">Corporativo B2B</button>
         <button class="nav-link" data-tab-target="larga-distancia">Larga Distancia</button>
@@ -49,7 +46,7 @@
   <!-- PANTALLA PRINCIPAL / HERO -->
   <main class="hero-section">
     
-    <!-- FONDO DE MAPA CON RED DE MONITOREO Y RUTAS EN LUZ NARANJA -->
+    <!-- FONDO DE MAPA CON LUZ NARANJA Y RADAR CÓRDOBA -->
     <div class="telemetry-map-bg">
       <svg viewBox="0 0 1400 900" class="telemetry-svg">
         <defs>
@@ -62,37 +59,32 @@
           </filter>
         </defs>
 
-        <!-- Rutas troncales conectadas con Córdoba (720, 420) -->
+        <!-- Red troncal nacional con centro en Córdoba (720, 420) -->
         <g class="network-routes" filter="url(#glow-orange)">
-          <!-- Cba a Rosario y Buenos Aires -->
           <line x1="720" y1="420" x2="890" y2="490" class="route-line primary" />
           <line x1="890" y1="490" x2="980" y2="520" class="route-line primary" />
-          <!-- Cba a Cuyo / Mendoza -->
           <line x1="720" y1="420" x2="540" y2="480" class="route-line" />
-          <!-- Cba a NOA / Tucumán / Salta -->
           <line x1="720" y1="420" x2="680" y2="240" class="route-line" />
           <line x1="680" y1="240" x2="640" y2="120" class="route-line" />
-          <!-- Cba a Patagonia / Neuquén / Bahía Blanca -->
           <line x1="720" y1="420" x2="650" y2="670" class="route-line" />
           <line x1="650" y1="670" x2="770" y2="720" class="route-line" />
           <line x1="650" y1="670" x2="580" y2="820" class="route-line" />
-          <!-- Interconexiones secundarias -->
           <line x1="890" y1="490" x2="770" y2="720" class="route-line faint" />
           <line x1="540" y1="480" x2="650" y2="670" class="route-line faint" />
         </g>
 
-        <!-- Nodos de monitoreo -->
+        <!-- Nodos lumínicos -->
         <g class="network-nodes">
-          <circle cx="980" cy="520" r="6" class="node-dot" /> <!-- Buenos Aires -->
-          <circle cx="890" cy="490" r="5" class="node-dot" /> <!-- Rosario -->
-          <circle cx="540" cy="480" r="5" class="node-dot" /> <!-- Cuyo -->
-          <circle cx="680" cy="240" r="5" class="node-dot" /> <!-- NOA -->
+          <circle cx="980" cy="520" r="6" class="node-dot" />
+          <circle cx="890" cy="490" r="5" class="node-dot" />
+          <circle cx="540" cy="480" r="5" class="node-dot" />
+          <circle cx="680" cy="240" r="5" class="node-dot" />
           <circle cx="640" cy="120" r="4" class="node-dot" />
-          <circle cx="650" cy="670" r="5" class="node-dot" /> <!-- Patagonia Norte -->
+          <circle cx="650" cy="670" r="5" class="node-dot" />
           <circle cx="770" cy="720" r="4" class="node-dot" />
           <circle cx="580" cy="820" r="4" class="node-dot" />
           
-          <!-- NODO CENTRAL: CÓRDOBA HUB (POLO 52) -->
+          <!-- Radar central Córdoba (Polo 52) -->
           <circle cx="720" cy="420" r="28" class="hub-radar-ring" />
           <circle cx="720" cy="420" r="14" class="hub-radar-pulse" />
           <circle cx="720" cy="420" r="7" class="hub-center-core" />
@@ -102,7 +94,7 @@
 
     <div class="hero-container">
       
-      <!-- Contenido Izquierdo -->
+      <!-- Columna izquierda -->
       <div class="hero-content">
         <div class="hero-badge">OPERACIONES LOGÍSTICAS NACIONALES</div>
         <h1 class="hero-title">
@@ -111,11 +103,11 @@
           <span class="gradient-text">EVOLUCIÓN.</span>
         </h1>
         
-        <p class="hero-subtitle" id="hero-subtitle-text">
+        <p class="hero-subtitle">
           El transporte inteligente que tu negocio y tu vida necesitan. Distribución estratégica, almacenaje en nave propia en Polo 52, flota monitoreada, respuestas inmediatas y cobertura integral desde Córdoba a todo el país.
         </p>
 
-        <!-- Botones Principales -->
+        <!-- Acciones principales -->
         <div class="hero-actions">
           <a id="btn-hero-cotizar" href="#" class="btn-orange" target="_blank">[ COTIZAR MUDANZA ]</a>
           <a id="btn-hero-portal" href="#" class="btn-outline" target="_blank">[ PORTAL CARGAS / B2B ]</a>
@@ -152,7 +144,7 @@
 
       </div>
 
-      <!-- Ventana de Anfitrión Virtual IA -->
+      <!-- Ventana de Anfitrión Virtual -->
       <div class="hero-media">
         <div class="ai-window">
           <div class="ai-header">
@@ -161,7 +153,7 @@
           </div>
 
           <div class="ai-screen">
-            <video id="ai-host-video" playsinline muted loop autoplay poster="./assets/img/mudanza-operarios.jpg">
+            <video id="ai-host-video" playsinline muted loop autoplay poster="./js/assets/img/mudanza-operarios.jpg">
               <source src="./assets/anfitrion.mp4" type="video/mp4" />
             </video>
             
@@ -179,7 +171,7 @@
     </div>
   </main>
 
-  <!-- CENTRO DE CONTROL: VENTANAS INTERACTIVAS (SIN SCROLL INTERMINABLE) -->
+  <!-- CENTRO DE CONTROL: VENTANAS INTERACTIVAS -->
   <section class="control-center">
     <div class="section-header">
       <div class="section-tag">CENTRO OPERATIVO INTEGRADO</div>
@@ -187,28 +179,18 @@
       <p class="section-desc">Seleccioná una división para ver fotos reales, equipamiento y accesos directos.</p>
     </div>
 
-    <!-- Pestañas dinámicas -->
+    <!-- Pestañas -->
     <div class="tabs-bar" id="services-tabs-container"></div>
 
-    <!-- Stage interactivo -->
+    <!-- Escenario dinámico -->
     <div class="display-stage" id="service-stage"></div>
-  </section>
-
-  <!-- BANNER PANORÁMICO INSTITUCIONAL -->
-  <section class="fleet-panoramic-section">
-    <div class="panoramic-container">
-      <img src="./assets/img/banner-flota-sunset.jpg" alt="Flota Nivel 9" class="panoramic-img" onerror="this.src='./assets/img/polo52-flota.jpg';" />
-      <div class="panoramic-overlay">
-        <h3>"Mientras el país duerme, Nivel 9 mueve tus sueños."</h3>
-        <p>Equipo operativo profesional y flota propia en permanente conexión federal.</p>
-      </div>
-    </div>
   </section>
 
   <!-- PIE DE PÁGINA CORPORATIVO -->
   <footer class="corporate-footer">
     <div class="footer-container">
-      <!-- Datos sin SAS ni CUIT (actualizables desde el engranaje) -->
+      
+      <!-- Datos de empresa sin SAS ni CUIT -->
       <div class="footer-info">
         <h3 id="footer-empresa-nombre">NIVEL <span>9</span></h3>
         <p id="footer-lema-1" class="footer-highlight">Logística de Excelencia</p>
@@ -216,7 +198,7 @@
         <p id="footer-base" class="footer-base">Base Operativa: Polo 52, Córdoba</p>
       </div>
 
-      <!-- Accesos directos 50% más grandes en el orden pedido -->
+      <!-- Accesos directos 50% más grandes en el orden requerido -->
       <div class="footer-links-col">
         <span class="footer-col-title">ACCESOS DIRECTOS</span>
         <div class="footer-links">
@@ -224,20 +206,21 @@
             <span class="link-bullet">▶</span> Guardia Operativa
           </a>
           <a id="footer-link-portal" href="#" target="_blank" class="footer-large-link">
-            <span class="link-bullet">▶</span> Portal Público
+            <span class="link-bullet">▶</span> Portal Publico
           </a>
           <a id="footer-link-cotizador" href="#" target="_blank" class="footer-large-link">
             <span class="link-bullet">▶</span> Autocotizador
           </a>
         </div>
       </div>
+
     </div>
     <div class="footer-bottom">
       <p>&copy; 2026 Nivel 9. Logística y Mudanzas Córdoba & Todo el País.</p>
     </div>
   </footer>
 
-  <!-- PANEL MODAL DEL ENGRANAJE (LOGIN + ADMINISTRACIÓN) -->
+  <!-- PANEL MODAL DEL ENGRANAJE (LOGIN + ADMIN) -->
   <div id="admin-modal" class="admin-modal-overlay">
     <div class="admin-modal-box">
       <div class="modal-header">
@@ -245,7 +228,7 @@
         <button id="modal-close-btn" class="modal-close">&times;</button>
       </div>
 
-      <!-- Pantalla de Login -->
+      <!-- Login -->
       <div id="admin-login-view" class="modal-body">
         <p class="login-instruction">Acceso exclusivo a configuración operativa.</p>
         <div class="form-group">
@@ -260,51 +243,41 @@
         <button id="admin-submit-login" class="btn-orange full-width">Ingresar al Panel</button>
       </div>
 
-      <!-- Pantalla de Gestión (Logueado) -->
+      <!-- Panel con sesión iniciada -->
       <div id="admin-panel-view" class="modal-body" style="display:none;">
-        
         <div class="admin-tabs">
-          <button class="adm-tab active" data-adm-sec="sec-fotos">📷 Agregar / Gestionar Fotos</button>
-          <button class="adm-tab" data-adm-sec="sec-datos">📝 Datos del Sitio y Pie</button>
+          <button class="adm-tab active" data-adm-sec="sec-fotos">📷 Agregar Fotos</button>
+          <button class="adm-tab" data-adm-sec="sec-datos">📝 Datos del Pie</button>
         </div>
 
-        <!-- Sección 1: Subir Fotos y Categorías -->
+        <!-- Fotos -->
         <div id="sec-fotos" class="adm-section active">
-          <h4>Agregar nueva imagen operativa</h4>
-          
           <div class="form-group">
-            <label>Título / Operación (¿Qué muestra la foto?)</label>
+            <label>Título / Tipo de operación</label>
             <input type="text" id="new-img-title" placeholder="Ej: Operativo con rampa en housing residencial" />
           </div>
 
           <div class="form-group">
-            <label>Sección / Categoría de destino</label>
-            <select id="new-img-category">
-              <!-- Se puebla dinámicamente -->
-            </select>
+            <label>División de destino</label>
+            <select id="new-img-category"></select>
           </div>
 
           <div class="form-group">
-            <label>O crear NUEVA Categoría</label>
-            <input type="text" id="new-category-name" placeholder="Ej: Reparto Farma / Crossdocking" />
+            <label>O crear NUEVA División</label>
+            <input type="text" id="new-category-name" placeholder="Ej: Cargas Especiales" />
           </div>
 
           <div class="form-group">
             <label>URL de imagen o Subir archivo</label>
-            <input type="text" id="new-img-url" placeholder="./assets/img/nombre-foto.jpg o link web" />
+            <input type="text" id="new-img-url" placeholder="./js/assets/img/nombre.jpg o link web" />
             <input type="file" id="new-img-file" accept="image/*" class="file-picker" />
           </div>
 
-          <button id="btn-save-image" class="btn-orange">Guardar Imagen en el Sitio</button>
+          <button id="btn-save-image" class="btn-orange full-width">Guardar Imagen en el Sitio</button>
         </div>
 
-        <!-- Sección 2: Ajuste de datos del pie y textos -->
+        <!-- Datos pie -->
         <div id="sec-datos" class="adm-section">
-          <h4>Textos institucionales del pie</h4>
-          <div class="form-group">
-            <label>Nombre Principal</label>
-            <input type="text" id="adm-empresa" value="NIVEL 9" />
-          </div>
           <div class="form-group">
             <label>Línea 1</label>
             <input type="text" id="adm-lema-1" value="Logística de Excelencia" />
@@ -317,20 +290,9 @@
             <label>Base Operativa</label>
             <input type="text" id="adm-base" value="Base Operativa: Polo 52, Córdoba" />
           </div>
-          <div class="form-group">
-            <label>WhatsApp Operaciones</label>
-            <input type="text" id="adm-wsp-operaciones" value="5493517046541" />
-          </div>
-          <div class="form-group">
-            <label>WhatsApp Administración</label>
-            <input type="text" id="adm-wsp-admin" value="5493516643875" />
-          </div>
-
-          <button id="btn-save-footer" class="btn-orange">Actualizar Datos</button>
+          <button id="btn-save-footer" class="btn-orange full-width">Guardar Cambios</button>
         </div>
-
       </div>
-
     </div>
   </div>
 

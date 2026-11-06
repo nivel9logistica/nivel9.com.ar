@@ -32,9 +32,9 @@ const NIVEL9_CONFIG = {
       ],
       imagenPrincipal: "./assets/img/mudanza-entrega.jpg",
       galeria: [
-        { url: "./assets/img/mudanza-entrega.jpg", titulo: "Entrega residencial con flota Nivel 9" },
-        { url: "./assets/img/mudanza-operarios.jpg", titulo: "Operarios con rampa hidráulica y sillón" },
-        { url: "./assets/img/mudanza-furgon.jpg", titulo: "Furgón acondicionado con mantas y estiba técnica" }
+        { url: "./js/assets/img/mudanza-entrega.jpg", titulo: "Entrega residencial con flota Nivel 9" },
+        { url: "./js/assets/img/mudanza-operarios.jpg", titulo: "Operarios con rampa hidráulica y sillón" },
+        { url: "./js/assets/img/mudanza-furgon.jpg", titulo: "Furgón acondicionado con mantas y estiba técnica" }
       ],
       botonTexto: "Calcular Mudanza Online",
       botonAccion: "cotizador"
@@ -53,10 +53,10 @@ const NIVEL9_CONFIG = {
       ],
       imagenPrincipal: "./assets/img/polo52-flota.jpg",
       galeria: [
-        { url: "./assets/img/polo52-flota.jpg", titulo: "Flota mediana frente a nave Polo 52" },
-        { url: "./assets/img/polo52-interior.jpg", titulo: "Interior de nave Polo 52 con oficinas y entrepiso" },
-        { url: "./assets/img/b2b-mercedes-pallets.jpg", titulo: "Mercedes 712C con carga de pallets filmados" },
-        { url: "./assets/img/b2b-mercedes-frente.jpg", titulo: "Frente de unidad 712C habilitada" }
+        { url: "./js/assets/img/polo52-flota.jpg", titulo: "Flota mediana frente a nave Polo 52" },
+        { url: "./js/assets/img/polo52-interior.jpg", titulo: "Interior de nave Polo 52 con oficinas y entrepiso" },
+        { url: "./js/assets/img/b2b-mercedes-pallets.jpg", titulo: "Mercedes 712C con carga de pallets filmados" },
+        { url: "./js/assets/img/b2b-mercedes-frente.jpg", titulo: "Frente de unidad 712C habilitada" }
       ],
       botonTexto: "Acceder a Portal Clientes",
       botonAccion: "portalPublico"
@@ -75,10 +75,10 @@ const NIVEL9_CONFIG = {
       ],
       imagenPrincipal: "./assets/img/scania-larga-distancia.jpg",
       galeria: [
-        { url: "./assets/img/scania-larga-distancia.jpg", titulo: "Scania R320 con furgón térmico de gran volumen" },
-        { url: "./assets/img/sprinter-iveco-flota.jpg", titulo: "Sprinter carrozada e Iveco Daily en predio operativo" },
-        { url: "./assets/img/mercedes-carrozado-blanco.jpg", titulo: "Camión paquetero para media y larga distancia" },
-        { url: "./assets/img/cabina-ruta-mate.png", titulo: "Toma de cabina en ruta al amanecer" }
+        { url: "./js/assets/img/scania-larga-distancia.jpg", titulo: "Scania R320 con furgón térmico de gran volumen" },
+        { url: "./js/assets/img/sprinter-iveco-flota.jpg", titulo: "Sprinter carrozada e Iveco Daily en predio operativo" },
+        { url: "./js/assets/img/mercedes-carrozado-blanco.jpg", titulo: "Camión paquetero para media y larga distancia" },
+        { url: "./js/assets/img/cabina-ruta-mate.png", titulo: "Toma de cabina en ruta al amanecer" }
       ],
       botonTexto: "Canal Cargas y Transportistas",
       botonAccion: "portalPublico"

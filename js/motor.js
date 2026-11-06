@@ -1,10 +1,8 @@
-// js/motor.js - Lógica interactiva, Supabase y Panel de Administración
-let currentAdminCategory = "mudanzas";
-
+// js/motor.js - Lógica interactiva y Panel Administrador
 document.addEventListener("DOMContentLoaded", () => {
   cargarConfiguracionGuardada();
   vincularEnlacesGlobales();
-  renderizarMenuYPestanas();
+  renderizarPestanas();
   inicializarVentanasServicios();
   inicializarControlVideo();
   inicializarPanelAdmin();
@@ -18,7 +16,7 @@ function cargarConfiguracionGuardada() {
       if (parsed.empresa) Object.assign(NIVEL9_CONFIG.empresa, parsed.empresa);
       if (parsed.servicios) Object.assign(NIVEL9_CONFIG.servicios, parsed.servicios);
     } catch (e) {
-      console.warn("Error leyendo configuración local:", e);
+      console.warn(e);
     }
   }
   aplicarDatosEmpresa();
@@ -26,12 +24,10 @@ function cargarConfiguracionGuardada() {
 
 function aplicarDatosEmpresa() {
   const emp = NIVEL9_CONFIG.empresa;
-  const elEmpresa = document.getElementById("footer-empresa-nombre");
   const elLema1 = document.getElementById("footer-lema-1");
   const elLema2 = document.getElementById("footer-lema-2");
   const elBase = document.getElementById("footer-base");
 
-  if (elEmpresa) elEmpresa.innerHTML = `NIVEL <span>9</span>`;
   if (elLema1) elLema1.textContent = emp.lema1;
   if (elLema2) elLema2.textContent = emp.lema2;
   if (elBase) elBase.textContent = emp.baseOperativa;
@@ -51,23 +47,19 @@ function vincularEnlacesGlobales() {
   setLink("footer-link-cotizador", links.cotizador);
 }
 
-function renderizarMenuYPestanas() {
-  const navMenu = document.getElementById("dynamic-nav-menu");
+function renderizarPestanas() {
   const tabsContainer = document.getElementById("services-tabs-container");
   const selectCategory = document.getElementById("new-img-category");
-
-  if (!navMenu || !tabsContainer) return;
+  if (!tabsContainer) return;
 
   const keys = Object.keys(NIVEL9_CONFIG.servicios);
 
-  // Render pestañas centro de control
   tabsContainer.innerHTML = keys.map((k, index) => {
     const s = NIVEL9_CONFIG.servicios[k];
     const num = String(index + 1).padStart(2, "0");
     return `<button class="tab-btn ${index === 0 ? 'active' : ''}" data-tab="${k}">[ ${num} ${s.nombreMenu.toUpperCase()} ]</button>`;
   }).join("");
 
-  // Poblar select del panel de administración
   if (selectCategory) {
     selectCategory.innerHTML = keys.map(k => {
       const s = NIVEL9_CONFIG.servicios[k];
@@ -88,7 +80,7 @@ function renderStage(key) {
     const imgTitle = typeof item === "string" ? "Operación Nivel 9" : (item.titulo || "");
     return `
       <div class="thumb-item ${index === 0 ? 'active' : ''}" onclick="cambiarFotoPrincipal('${imgSrc}', '${imgTitle}', this)" title="${imgTitle}">
-        <img src="${imgSrc}" alt="${imgTitle}" onerror="this.src='./assets/img/polo52-flota.jpg';" />
+        <img src="${imgSrc}" alt="${imgTitle}" />
       </div>
     `;
   }).join("");
@@ -100,7 +92,7 @@ function renderStage(key) {
       <div class="stage-visuals">
         <div class="main-img-box">
           <span class="stage-badge" id="active-stage-badge">${activeTitle}</span>
-          <img id="active-stage-img" src="${data.imagenPrincipal}" alt="${data.titulo}" onerror="this.src='./assets/img/polo52-flota.jpg';" />
+          <img id="active-stage-img" src="${data.imagenPrincipal}" alt="${data.titulo}" />
         </div>
         <div class="thumbs-strip">
           ${thumbsHtml}
@@ -130,14 +122,28 @@ function cambiarFotoPrincipal(src, title, el) {
 
 function inicializarVentanasServicios() {
   const container = document.getElementById("services-tabs-container");
-  if (!container) return;
+  const navLinks = document.querySelectorAll("[data-tab-target]");
 
-  container.addEventListener("click", (e) => {
-    if (e.target.classList.contains("tab-btn")) {
-      const key = e.target.getAttribute("data-tab");
-      document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b === e.target));
-      renderStage(key);
-    }
+  const activarPestana = (key) => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.getAttribute("data-tab") === key));
+    renderStage(key);
+  };
+
+  if (container) {
+    container.addEventListener("click", (e) => {
+      if (e.target.classList.contains("tab-btn")) {
+        activarPestana(e.target.getAttribute("data-tab"));
+      }
+    });
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const target = link.getAttribute("data-tab-target");
+      activarPestana(target);
+      document.querySelector(".control-center").scrollIntoView({ behavior: "smooth" });
+    });
   });
 
   const firstKey = Object.keys(NIVEL9_CONFIG.servicios)[0];
@@ -160,7 +166,7 @@ function inicializarControlVideo() {
   }
 }
 
-/* PANEL ADMIN (ENGRANAJE) */
+/* ADMINISTRACIÓN */
 function inicializarPanelAdmin() {
   const gearBtn = document.getElementById("admin-gear-btn");
   const modal = document.getElementById("admin-modal");
@@ -174,19 +180,11 @@ function inicializarPanelAdmin() {
 
   if (!gearBtn || !modal) return;
 
-  gearBtn.addEventListener("click", () => {
-    modal.classList.add("open");
-  });
-
-  closeBtn.addEventListener("click", () => {
-    modal.classList.remove("open");
-  });
+  gearBtn.addEventListener("click", () => modal.classList.add("open"));
+  closeBtn.addEventListener("click", () => modal.classList.remove("open"));
 
   submitLogin.addEventListener("click", () => {
-    const user = userInput.value.trim();
-    const pass = passInput.value.trim();
-
-    if (user === "Admin" && pass === "2468") {
+    if (userInput.value.trim() === "Admin" && passInput.value.trim() === "2468") {
       loginView.style.display = "none";
       panelView.style.display = "block";
       errorMsg.style.display = "none";
@@ -195,7 +193,6 @@ function inicializarPanelAdmin() {
     }
   });
 
-  // Pestañas internas del admin
   const admTabs = document.querySelectorAll(".adm-tab");
   admTabs.forEach(t => {
     t.addEventListener("click", () => {
@@ -207,7 +204,6 @@ function inicializarPanelAdmin() {
     });
   });
 
-  // Guardar nueva imagen
   const btnSaveImg = document.getElementById("btn-save-image");
   const fileInput = document.getElementById("new-img-file");
   const urlInput = document.getElementById("new-img-url");
@@ -243,11 +239,9 @@ function inicializarPanelAdmin() {
         NIVEL9_CONFIG.servicios[catKey].imagenPrincipal = imgSrc;
       }
       NIVEL9_CONFIG.servicios[catKey].galeria.push({ url: imgSrc, titulo: title });
-
-      // Guardar en localStorage y Supabase
       localStorage.setItem("nivel9_custom_config", JSON.stringify(NIVEL9_CONFIG));
       
-      renderizarMenuYPestanas();
+      renderizarPestanas();
       renderStage(catKey);
       modal.classList.remove("open");
       alert("¡Imagen agregada con éxito!");
@@ -260,11 +254,10 @@ function inicializarPanelAdmin() {
     } else if (urlInput.value.trim()) {
       guardarImagenFinal(urlInput.value.trim());
     } else {
-      alert("Por favor elegí un archivo o pegá una URL.");
+      alert("Por favor seleccioná un archivo o ingresá una URL.");
     }
   });
 
-  // Guardar datos del footer
   const btnSaveFooter = document.getElementById("btn-save-footer");
   btnSaveFooter.addEventListener("click", () => {
     NIVEL9_CONFIG.empresa.lema1 = document.getElementById("adm-lema-1").value.trim();

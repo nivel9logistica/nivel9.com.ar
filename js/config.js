@@ -6,12 +6,39 @@ const NIVEL9_CONFIG = {
     lema2: "Evolución Constante",
     baseOperativa: "Base Operativa: Polo 52, Córdoba"
   },
+  textosWeb: {
+    badgeHero: "OPERACIONES LOGÍSTICAS NACIONALES",
+    subtituloHero: "El transporte inteligente que tu negocio y tu vida necesitan. Distribución estratégica, gran presencia operativa en Polo 52, flota monitoreada, respuestas inmediatas y cobertura integral desde Córdoba a todo el país.",
+    celula1Titulo: "Mudanzas Particulares Seguras",
+    celula1Texto: "Tratamos cada mobiliario como propio. Cuidado extremo, puntualidad y respaldo total para que tu mudanza sea impecable.",
+    celula2Titulo: "Soluciones Corporativas B2B",
+    celula2Texto: "Estructura logística y gran presencia operativa en Polo 52 para abastecimiento comercial, cross-docking y distribución capilar.",
+    celula3Titulo: "Larga Distancia Federal",
+    celula3Texto: "Conexión directa desde Córdoba hacia todo el país con monitoreo continuo y unidades habilitadas."
+  },
   links: {
     cotizador: "https://nivel9logistica.github.io/cotizador-nivel9/",
     portalPublico: "https://nivel9logistica.github.io/portal-publico.html/",
     wspOperaciones: "https://wa.me/5493517046541?text=Hola%20Nivel%209,%20quiero%20cotizar%20un%20servicio.",
     wspAdmin: "https://wa.me/5493516643875?text=Hola%20Nivel%209,%20contacto%20con%20Administraci%C3%B3n%20de%20Operaciones."
   },
+  accesosDirectos: [
+    {
+      nombre: "Guardia Operativa",
+      url: "https://wa.me/5493517046541?text=Hola%20Nivel%209,%20contacto%20con%20Guardia%20Operativa",
+      destacado: true
+    },
+    {
+      nombre: "Portal Publico",
+      url: "https://nivel9logistica.github.io/portal-publico.html/",
+      destacado: false
+    },
+    {
+      nombre: "Autocotizador",
+      url: "https://nivel9logistica.github.io/cotizador-nivel9/",
+      destacado: false
+    }
+  ],
   servicios: {
     "mudanzas": {
       id: "mudanzas",
@@ -27,8 +54,8 @@ const NIVEL9_CONFIG = {
       ],
       imagenPrincipal: "./js/assets/img/mudanza-operarios.jpg",
       galeria: [
-        { url: "./js/assets/img/mudanza-operarios.jpg", titulo: "Operarios Nivel 9 con rampa y sillón" },
-        { url: "./js/assets/img/sprinter-iveco-flota.jpg", titulo: "Flota mediana acondicionada" }
+        { url: "./js/assets/img/mudanza-operarios.jpg", titulo: "" },
+        { url: "./js/assets/img/sprinter-iveco-flota.jpg", titulo: "" }
       ],
       botonTexto: "Calcular Mudanza Online",
       botonAccion: "cotizador"
@@ -37,19 +64,19 @@ const NIVEL9_CONFIG = {
       id: "corporativo",
       nombreMenu: "Corporativo B2B",
       tag: "POLO 52 | SERVICIOS 3PL & 4PL",
-      titulo: "Hub Logístico, Almacenaje y B2B",
-      descripcion: "Operamos desde nuestra nave en Polo 52, el centro logístico más importante del interior de Córdoba. Servicios directos de cross-docking, guarda y distribución capilar.",
+      titulo: "Hub Logístico, Operaciones y B2B",
+      descripcion: "Operamos con gran presencia estratégica en Polo 52, el centro logístico más importante del interior de Córdoba. Servicios directos de cross-docking, consolidación y distribución capilar.",
       caracteristicas: [
-        "Nave logística en Polo 52 para almacenaje y consolidación.",
+        "Fuerte presencia operativa en Polo 52 para consolidación y logística integral.",
         "Distribución capilar y abastecimiento comercial con carga paletizada.",
-        "Soluciones 3PL (picking, guarda) y 4PL (gestión integral).",
-        "Control documental estricto, remitos conformados y chóferes LiNTI."
+        "Soluciones 3PL (cross-docking, consolidación) y 4PL (gestión integral).",
+        "Control documental estricto, remitos conformados y choferes LiNTI."
       ],
       imagenPrincipal: "./js/assets/img/polo52-flota.jpg",
       galeria: [
-        { url: "./js/assets/img/polo52-flota.jpg", titulo: "Flota frente a nave Polo 52" },
-        { url: "./js/assets/img/b2b-mercedes-pallets.jpg", titulo: "Mercedes 712C con carga de pallets filmados" },
-        { url: "./js/assets/img/b2b-mercedes-frente.jpg", titulo: "Frente Mercedes 712C habilitado" }
+        { url: "./js/assets/img/polo52-flota.jpg", titulo: "" },
+        { url: "./js/assets/img/b2b-mercedes-pallets.jpg", titulo: "" },
+        { url: "./js/assets/img/b2b-mercedes-frente.jpg", titulo: "" }
       ],
       botonTexto: "Acceder a Portal Clientes",
       botonAccion: "portalPublico"
@@ -68,9 +95,9 @@ const NIVEL9_CONFIG = {
       ],
       imagenPrincipal: "./js/assets/img/scania-larga-distancia.jpg",
       galeria: [
-        { url: "./js/assets/img/scania-larga-distancia.jpg", titulo: "Scania R320 térmico de gran volumen" },
-        { url: "./js/assets/img/cabina-ruta-mate.png", titulo: "Toma de cabina en ruta al amanecer" },
-        { url: "./js/assets/img/industrial-semirremolque.jpg", titulo: "Semirremolque en parque logístico" }
+        { url: "./js/assets/img/scania-larga-distancia.jpg", titulo: "" },
+        { url: "./js/assets/img/cabina-ruta-mate.png", titulo: "" },
+        { url: "./js/assets/img/industrial-semirremolque.jpg", titulo: "" }
       ],
       botonTexto: "Canal Cargas y Transportistas",
       botonAccion: "portalPublico"

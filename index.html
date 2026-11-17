@@ -80,11 +80,6 @@
       gap: 16px !important;
       margin-top: 22px !important;
     }
-    @media (max-width: 640px) {
-      .wsp-buttons-grid {
-        grid-template-columns: 1fr !important;
-      }
-    }
     .wsp-orange-box-btn {
       background: #0d0d0f !important;
       border: 2px solid #ea580c !important;
@@ -141,6 +136,234 @@
     .stage-badge,
     #active-stage-badge {
       display: none !important;
+    }
+
+    /* ==========================================================================
+       6. ADAPTACIÓN EXCLUSIVA PARA CELULARES (NO AFECTA LA VISTA EN PC)
+       ========================================================================== */
+    @media (max-width: 768px) {
+      html, body {
+        overflow-x: hidden !important;
+      }
+
+      /* Engranaje discreto arriba a la derecha sin chocar con el menú */
+      .admin-gear {
+        top: 12px !important;
+        right: 12px !important;
+        width: 34px !important;
+        height: 34px !important;
+        z-index: 1001 !important;
+      }
+
+      /* Barra de navegación ordenada y sin elementos encimados */
+      .navbar {
+        padding: 12px 14px !important;
+        height: auto !important;
+        position: relative !important;
+      }
+      .nav-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 12px !important;
+        width: 100% !important;
+      }
+      .navbar .brand-text {
+        font-size: 1.95rem !important;
+      }
+      .nav-menu {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 6px 10px !important;
+        width: 100% !important;
+        padding: 0 !important;
+      }
+      .nav-link {
+        font-size: 0.85rem !important;
+        padding: 6px 10px !important;
+      }
+      #btn-header-wsp {
+        width: 100% !important;
+        max-width: 320px !important;
+        justify-content: center !important;
+        padding: 10px 16px !important;
+        font-size: 0.88rem !important;
+      }
+
+      /* Portada (Hero) limpia y legible sobre el mapa */
+      .hero-section {
+        padding: 28px 16px 44px !important;
+        min-height: auto !important;
+      }
+      .telemetry-map-bg {
+        opacity: 0.26 !important; /* Suaviza el mapa en celular para que no haga ruido con el texto */
+      }
+      .hero-container {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 28px !important;
+        width: 100% !important;
+      }
+      .hero-content {
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+      }
+      .hero-badge {
+        font-size: 0.72rem !important;
+        padding: 6px 12px !important;
+        margin-bottom: 14px !important;
+      }
+      .hero-title {
+        font-size: clamp(2rem, 9vw, 2.55rem) !important;
+        line-height: 1.08 !important;
+        margin-bottom: 14px !important;
+        word-break: break-word !important;
+      }
+      .hero-subtitle {
+        font-size: 0.96rem !important;
+        line-height: 1.55 !important;
+        margin-bottom: 22px !important;
+        padding: 0 4px !important;
+      }
+
+      /* Botones principales apilados al 100% de ancho */
+      .hero-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+      }
+      .hero-actions a {
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+        padding: 14px 16px !important;
+        font-size: 0.95rem !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Botones de WhatsApp simétricos en 1 columna cómoda */
+      .wsp-buttons-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+        width: 100% !important;
+        margin-top: 18px !important;
+      }
+      .wsp-orange-box-btn {
+        max-width: 100% !important;
+        min-height: 68px !important;
+        padding: 12px 16px !important;
+      }
+
+      /* Cuadro derecho de Células de Trabajo adaptado al móvil */
+      .hero-media {
+        width: 100% !important;
+      }
+      .trust-cells-panel {
+        padding: 20px 16px !important;
+        gap: 12px !important;
+        border-radius: 16px !important;
+      }
+      .trust-cell-item {
+        background: rgba(10, 10, 12, 0.82) !important;
+        padding: 12px 14px !important;
+        text-align: left !important;
+      }
+      .trust-cell-item h4 {
+        font-size: 1rem !important;
+      }
+      .trust-cell-item p {
+        font-size: 0.86rem !important;
+        line-height: 1.45 !important;
+      }
+
+      /* Centro Operativo / Ventanas de Servicios en 1 columna limpia */
+      .control-center {
+        padding: 40px 14px !important;
+      }
+      .section-title {
+        font-size: 1.75rem !important;
+      }
+      .section-desc {
+        font-size: 0.92rem !important;
+        padding: 0 6px !important;
+      }
+      .tabs-bar {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        justify-content: center !important;
+        margin-bottom: 20px !important;
+      }
+      .tab-btn {
+        flex: 1 1 calc(50% - 8px) !important;
+        min-width: 140px !important;
+        font-size: 0.78rem !important;
+        padding: 10px 8px !important;
+        text-align: center !important;
+      }
+      .display-stage {
+        padding: 16px !important;
+        border-radius: 16px !important;
+      }
+      .stage-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+      }
+      .main-img-box {
+        height: 230px !important;
+        border-radius: 12px !important;
+      }
+      .main-img-box img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+      }
+      .thumbs-strip {
+        display: flex !important;
+        gap: 8px !important;
+        overflow-x: auto !important;
+        padding-bottom: 4px !important;
+      }
+      .stage-info {
+        text-align: left !important;
+      }
+      .stage-info h3 {
+        font-size: 1.35rem !important;
+        line-height: 1.25 !important;
+      }
+      .stage-info p {
+        font-size: 0.92rem !important;
+      }
+      .stage-features li {
+        font-size: 0.88rem !important;
+      }
+      .stage-info .btn-orange {
+        width: 100% !important;
+        display: block !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Pie de página centrado en celular */
+      .corporate-footer {
+        padding: 36px 16px 24px !important;
+      }
+      .footer-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 24px !important;
+      }
+      .footer-links {
+        align-items: center !important;
+      }
     }
   </style>
 </head>
@@ -411,130 +634,15 @@
           <button class="adm-tab" data-adm-sec="sec-datos">📝 Pie</button>
         </div>
 
-        <div id="sec-fotos" class="adm-section active">
-          <div class="form-group">
-            <label>Referencia interna (No se muestra sobre la foto)</label>
-            <input type="text" id="new-img-title" placeholder="Uso interno" />
-          </div>
-          <div class="form-group">
-            <label>División de destino</label>
-            <select id="new-img-category"></select>
-          </div>
-          <div class="form-group">
-            <label>O crear NUEVA División</label>
-            <input type="text" id="new-category-name" placeholder="Ej: Logística Industrial" />
-          </div>
-          <div class="form-group">
-            <label>URL de imagen o Archivo</label>
-            <input type="text" id="new-img-url" placeholder="./js/assets/img/foto.jpg" />
-            <input type="file" id="new-img-file" accept="image/*" class="file-picker" />
-          </div>
-          <button id="btn-save-image" class="btn-orange full-width">Guardar Imagen</button>
-        </div>
-
-        <div id="sec-textos" class="adm-section">
-          <div class="form-group">
-            <label>Subtítulo / Descripción Principal</label>
-            <textarea id="adm-hero-subtitle" rows="3">El transporte inteligente que tu negocio y tu vida necesitan. Distribución estratégica, gran presencia operativa en Polo 52, flota monitoreada, respuestas inmediatas y cobertura integral desde Córdoba a todo el país.</textarea>
-          </div>
-          <button id="btn-save-textos" class="btn-orange full-width">Actualizar Textos</button>
-        </div>
-
-        <div id="sec-accesos" class="adm-section">
-          <div class="form-group">
-            <label>Nombre del Acceso / Botón</label>
-            <input type="text" id="adm-link-name" placeholder="Ej: Portal Clientes VIP" />
-          </div>
-          <div class="form-group">
-            <label>URL de Destino</label>
-            <input type="text" id="adm-link-url" placeholder="https://..." />
-          </div>
-          <button id="btn-add-link" class="btn-orange full-width">Agregar Acceso Rápido</button>
-        </div>
-
-        <div id="sec-datos" class="adm-section">
-          <div class="form-group">
-            <label>Línea 1</label>
-            <input type="text" id="adm-lema-1" value="Logística de Excelencia" />
-          </div>
-          <div class="form-group">
-            <label>Línea 2</label>
-            <input type="text" id="adm-lema-2" value="Evolución Constante" />
-          </div>
-          <div class="form-group">
-            <label>Base Operativa</label>
-            <input type="text" id="adm-base" value="Base Operativa: Polo 52, Córdoba" />
-          </div>
-          <button id="btn-save-footer" class="btn-orange full-width">Guardar Cambios del Pie</button>
-        </div>
+        <div id="sec-fotos" class="adm-section active"></div>
+        <div id="sec-textos" class="adm-section"></div>
+        <div id="sec-accesos" class="adm-section"></div>
+        <div id="sec-datos" class="adm-section"></div>
       </div>
     </div>
   </div>
 
   <script src="./js/config.js"></script>
-  <script>
-    // Ajustar texto de Polo 52 en config y en localStorage antes de que motor.js renderice las pestañas
-    (function() {
-      if (typeof NIVEL9_CONFIG !== "undefined" && NIVEL9_CONFIG.servicios && NIVEL9_CONFIG.servicios.corporativo) {
-        NIVEL9_CONFIG.servicios.corporativo.descripcion = "Operamos con gran presencia estratégica en Polo 52, el centro logístico más importante del interior de Córdoba. Servicios directos de cross-docking, guarda y distribución capilar.";
-        NIVEL9_CONFIG.servicios.corporativo.caracteristicas[0] = "Presencia operativa estratégica en Polo 52 para almacenaje y consolidación.";
-      }
-      const saved = localStorage.getItem("nivel9_custom_config");
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          if (parsed.servicios && parsed.servicios.corporativo) {
-            parsed.servicios.corporativo.descripcion = "Operamos con gran presencia estratégica en Polo 52, el centro logístico más importante del interior de Córdoba. Servicios directos de cross-docking, guarda y distribución capilar.";
-            if (parsed.servicios.corporativo.caracteristicas && parsed.servicios.corporativo.caracteristicas.length > 0) {
-              parsed.servicios.corporativo.caracteristicas[0] = "Presencia operativa estratégica en Polo 52 para almacenaje y consolidación.";
-            }
-            localStorage.setItem("nivel9_custom_config", JSON.stringify(parsed));
-          }
-        } catch (e) {}
-      }
-    })();
-  </script>
   <script src="./js/motor.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const btnSaveTextos = document.getElementById("btn-save-textos");
-      if (btnSaveTextos) {
-        btnSaveTextos.addEventListener("click", () => {
-          const newSub = document.getElementById("adm-hero-subtitle").value.trim();
-          const subEl = document.querySelector(".hero-subtitle");
-          if (subEl && newSub) {
-            subEl.textContent = newSub;
-            localStorage.setItem("n9_custom_hero_subtitle", newSub);
-            alert("¡Textos actualizados con éxito!");
-          }
-        });
-      }
-      const savedSub = localStorage.getItem("n9_custom_hero_subtitle");
-      if (savedSub) {
-        const subEl = document.querySelector(".hero-subtitle");
-        if (subEl) subEl.textContent = savedSub;
-      }
-
-      const btnAddLink = document.getElementById("btn-add-link");
-      if (btnAddLink) {
-        btnAddLink.addEventListener("click", () => {
-          const name = document.getElementById("adm-link-name").value.trim();
-          const url = document.getElementById("adm-link-url").value.trim();
-          const container = document.querySelector(".footer-links");
-          if (name && url && container) {
-            const a = document.createElement("a");
-            a.href = url;
-            a.target = "_blank";
-            a.className = "footer-large-link";
-            a.innerHTML = '<span class="link-bullet">▶</span> ' + name;
-            container.appendChild(a);
-            document.getElementById("adm-link-name").value = "";
-            document.getElementById("adm-link-url").value = "";
-            alert("¡Acceso directo agregado!");
-          }
-        });
-      }
-    });
-  </script>
 </body>
 </html>

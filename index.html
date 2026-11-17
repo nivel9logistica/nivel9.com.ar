@@ -4,11 +4,82 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NIVEL 9 | Logística de Excelencia</title>
-  <meta name="description" content="Transporte inteligente, distribución y almacenaje en Polo 52, Córdoba. Cobertura federal." />
+  <meta name="description" content="Transporte inteligente, distribución y gran presencia en Polo 52, Córdoba. Cobertura federal." />
   <link rel="stylesheet" href="./css/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* Estilos específicos ajustados para los requerimientos */
+    .brand-text { font-size: 1.8rem !important; }
+    .wsp-green-btn {
+      background: #25D366 !important;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: #ffffff !important;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    }
+    .wsp-green-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+    }
+    .wsp-green-icon {
+      background: rgba(255,255,255,0.2);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .wsp-green-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.3;
+    }
+    .wsp-green-text strong {
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+    .wsp-green-text small {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+    .trust-cells-panel {
+      background: rgba(24, 24, 27, 0.92);
+      border: 1px solid #3f3f46;
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .trust-cell-item {
+      border-left: 3px solid #ea580c;
+      padding-left: 15px;
+    }
+    .trust-cell-item h4 {
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+    .trust-cell-item p {
+      color: #a1a1aa;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
 
@@ -27,7 +98,7 @@
         <span class="brand-text">NIVEL <span>9</span></span>
       </a>
 
-      <!-- Menú superior 50% más grande -->
+      <!-- Menú superior -->
       <nav class="nav-menu">
         <button class="nav-link" data-tab-target="mudanzas">Mudanzas</button>
         <button class="nav-link" data-tab-target="corporativo">Corporativo B2B</button>
@@ -35,7 +106,7 @@
         <a id="btn-header-cotizador" href="#" class="nav-link special" target="_blank">Autocotizador</a>
       </nav>
 
-      <!-- Botón amarillo: WhatsApp Operaciones 3517046541 -->
+      <!-- Botón WhatsApp Superior -->
       <a id="btn-header-wsp" href="https://wa.me/5493517046541?text=Hola%20Nivel%209,%20quiero%20cotizar%20un%20servicio" class="btn-primary" target="_blank">
         <span>COTIZAR POR WHATSAPP</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
@@ -46,7 +117,7 @@
   <!-- PANTALLA PRINCIPAL / HERO -->
   <main class="hero-section">
     
-    <!-- FONDO DE MAPA CON LUZ NARANJA Y RADAR CÓRDOBA -->
+    <!-- FONDO DE MAPA DE ARGENTINA / RUTAS Y MONITOREO SATELITAL -->
     <div class="telemetry-map-bg">
       <svg viewBox="0 0 1400 900" class="telemetry-svg">
         <defs>
@@ -59,6 +130,11 @@
           </filter>
         </defs>
 
+        <!-- Silueta abstracta mapa de Argentina / Conexiones ruteras -->
+        <g class="argentina-outline-routes" opacity="0.25">
+          <path d="M680,120 L720,220 L750,350 L720,420 L680,550 L650,670 L600,780 L580,840 L540,800 L560,720 L620,580 L660,450 L640,320 L680,120 Z" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="6,6" />
+        </g>
+
         <!-- Red troncal nacional con centro en Córdoba (720, 420) -->
         <g class="network-routes" filter="url(#glow-orange)">
           <line x1="720" y1="420" x2="890" y2="490" class="route-line primary" />
@@ -69,11 +145,9 @@
           <line x1="720" y1="420" x2="650" y2="670" class="route-line" />
           <line x1="650" y1="670" x2="770" y2="720" class="route-line" />
           <line x1="650" y1="670" x2="580" y2="820" class="route-line" />
-          <line x1="890" y1="490" x2="770" y2="720" class="route-line faint" />
-          <line x1="540" y1="480" x2="650" y2="670" class="route-line faint" />
         </g>
 
-        <!-- Nodos lumínicos -->
+        <!-- Nodos lumínicos y anillos de monitoreo -->
         <g class="network-nodes">
           <circle cx="980" cy="520" r="6" class="node-dot" />
           <circle cx="890" cy="490" r="5" class="node-dot" />
@@ -84,7 +158,8 @@
           <circle cx="770" cy="720" r="4" class="node-dot" />
           <circle cx="580" cy="820" r="4" class="node-dot" />
           
-          <!-- Radar central Córdoba (Polo 52) -->
+          <!-- Hub central Córdoba (Polo 52) con anillos de monitoreo -->
+          <circle cx="720" cy="420" r="45" class="hub-radar-ring" stroke="#ea580c" stroke-width="1" fill="none" opacity="0.6" />
           <circle cx="720" cy="420" r="28" class="hub-radar-ring" />
           <circle cx="720" cy="420" r="14" class="hub-radar-pulse" />
           <circle cx="720" cy="420" r="7" class="hub-center-core" />
@@ -104,7 +179,7 @@
         </h1>
         
         <p class="hero-subtitle">
-          El transporte inteligente que tu negocio y tu vida necesitan. Distribución estratégica, almacenaje en nave propia en Polo 52, flota monitoreada, respuestas inmediatas y cobertura integral desde Córdoba a todo el país.
+          El transporte inteligente que tu negocio y tu vida necesitan. Distribución estratégica, gran presencia operativa en Polo 52, flota monitoreada, respuestas inmediatas y cobertura integral desde Córdoba a todo el país.
         </p>
 
         <!-- Acciones principales -->
@@ -113,28 +188,26 @@
           <a id="btn-hero-portal" href="#" class="btn-outline" target="_blank">[ PORTAL CARGAS / B2B ]</a>
         </div>
 
-        <!-- DOBLE BOTÓN DE WHATSAPP (EN LOS CÍRCULOS AZULES) -->
-        <div class="wsp-blue-circles-row">
+        <!-- DOBLE BOTÓN DE WHATSAPP VERDES UNIFICADOS (SIN TÍTULOS CHICOS NARANJAS) -->
+        <div class="wsp-blue-circles-row" style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
           
-          <!-- Botón 1: Operaciones Gerencia (3517046541) -->
-          <a href="https://wa.me/5493517046541?text=Hola%20Nivel%209,%20me%20comunico%20con%20Operaciones%20Gerencia." target="_blank" class="wsp-tactical-btn gerencia">
-            <div class="wsp-tactical-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24z"/></svg>
+          <!-- Botón 1 -->
+          <a href="https://wa.me/5493517046541?text=Hola%20Nivel%209,%20me%20comunico%20para%20consultas%20generales." target="_blank" class="wsp-green-btn">
+            <div class="wsp-green-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24z"/></svg>
             </div>
-            <div class="wsp-tactical-text">
-              <span class="role-tag">OPERACIONES</span>
+            <div class="wsp-green-text">
               <strong>Operaciones gerencia</strong>
               <small>+54 9 351 704-6541</small>
             </div>
           </a>
 
-          <!-- Botón 2: Administración de Operaciones (3516643875) -->
-          <a href="https://wa.me/5493516643875?text=Hola%20Nivel%209,%20me%20comunico%20con%20Administraci%C3%B3n%20de%20Operaciones." target="_blank" class="wsp-tactical-btn administracion">
-            <div class="wsp-tactical-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24z"/></svg>
+          <!-- Botón 2 -->
+          <a href="https://wa.me/5493516643875?text=Hola%20Nivel%209,%20me%20comunico%20con%20administración." target="_blank" class="wsp-green-btn">
+            <div class="wsp-green-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24z"/></svg>
             </div>
-            <div class="wsp-tactical-text">
-              <span class="role-tag">GESTIÓN & REMITOS</span>
+            <div class="wsp-green-text">
               <strong>Administración de operaciones</strong>
               <small>+54 9 351 664-3875</small>
             </div>
@@ -144,26 +217,27 @@
 
       </div>
 
-      <!-- Ventana de Anfitrión Virtual -->
+      <!-- Columna derecha: Células de Trabajo y Confianza (Reemplazo del video) -->
       <div class="hero-media">
-        <div class="ai-window">
-          <div class="ai-header">
+        <div class="trust-cells-panel">
+          <div class="ai-header" style="border-bottom: 1px solid #3f3f46; padding-bottom: 10px; margin-bottom: 5px;">
             <span class="pulse-dot"></span>
-            <span class="ai-label">VIDEO IA / ANFITRIÓN VIRTUAL</span>
+            <span class="ai-label">EXCELENCIA OPERATIVA & CONFIANZA</span>
           </div>
 
-          <div class="ai-screen">
-            <video id="ai-host-video" playsinline muted loop autoplay poster="./js/assets/img/mudanza-operarios.jpg">
-              <source src="./assets/anfitrion.mp4" type="video/mp4" />
-            </video>
-            
-            <div class="ai-overlay">
-              <div class="audio-waves">
-                <span></span><span></span><span></span><span></span><span></span>
-              </div>
-              <p class="ai-caption">"Hola, te doy la bienvenida a Nivel 9. Conocé nuestra logística..."</p>
-              <button id="toggle-audio-btn" class="ai-control-btn">🔊 Activar audio</button>
-            </div>
+          <div class="trust-cell-item">
+            <h4>Mudanzas Particulares Seguras</h4>
+            <p>Tratamos cada mobiliario como propio. Cuidado extremo, puntualidad y respaldo total para que tu mudanza sea impecable.</p>
+          </div>
+
+          <div class="trust-cell-item">
+            <h4>Soluciones Corporativas B2B</h4>
+            <p>Estructura logística y gran presencia en Polo 52 para abastecimiento comercial, cross-docking y distribución capilar.</p>
+          </div>
+
+          <div class="trust-cell-item">
+            <h4>Larga Distancia Federal</h4>
+            <p>Conexión directa desde Córdoba hacia todo el país con monitoreo continuo y transportistas validados.</p>
           </div>
         </div>
       </div>
@@ -190,7 +264,7 @@
   <footer class="corporate-footer">
     <div class="footer-container">
       
-      <!-- Datos de empresa sin SAS ni CUIT -->
+      <!-- Datos de empresa -->
       <div class="footer-info">
         <h3 id="footer-empresa-nombre">NIVEL <span>9</span></h3>
         <p id="footer-lema-1" class="footer-highlight">Logística de Excelencia</p>
@@ -198,7 +272,7 @@
         <p id="footer-base" class="footer-base">Base Operativa: Polo 52, Córdoba</p>
       </div>
 
-      <!-- Accesos directos 50% más grandes en el orden requerido -->
+      <!-- Accesos directos -->
       <div class="footer-links-col">
         <span class="footer-col-title">ACCESOS DIRECTOS</span>
         <div class="footer-links">
@@ -220,7 +294,7 @@
     </div>
   </footer>
 
-  <!-- PANEL MODAL DEL ENGRANAJE (LOGIN + ADMIN) -->
+  <!-- PANEL MODAL DEL ENGRANAJE (CONFIGURACIÓN AMPLIADA) -->
   <div id="admin-modal" class="admin-modal-overlay">
     <div class="admin-modal-box">
       <div class="modal-header">
@@ -243,37 +317,61 @@
         <button id="admin-submit-login" class="btn-orange full-width">Ingresar al Panel</button>
       </div>
 
-      <!-- Panel con sesión iniciada -->
+      <!-- Panel con sesión iniciada (Ampliado para textos, imágenes, accesos y divisiones) -->
       <div id="admin-panel-view" class="modal-body" style="display:none;">
-        <div class="admin-tabs">
-          <button class="adm-tab active" data-adm-sec="sec-fotos">📷 Agregar Fotos</button>
-          <button class="adm-tab" data-adm-sec="sec-datos">📝 Datos del Pie</button>
+        <div class="admin-tabs" style="display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 15px;">
+          <button class="adm-tab active" data-adm-sec="sec-fotos">📷 Fotos</button>
+          <button class="adm-tab" data-adm-sec="sec-textos">✏️ Textos Web</button>
+          <button class="adm-tab" data-adm-sec="sec-accesos">🔗 Accesos</button>
+          <button class="adm-tab" data-adm-sec="sec-datos">📝 Pie</button>
         </div>
 
-        <!-- Fotos -->
+        <!-- Fotos (Sin títulos molestos en pantalla) -->
         <div id="sec-fotos" class="adm-section active">
           <div class="form-group">
-            <label>Título / Tipo de operación</label>
-            <input type="text" id="new-img-title" placeholder="Ej: Operativo con rampa en housing residencial" />
+            <label>Descripción interna de la foto</label>
+            <input type="text" id="new-img-title" placeholder="Ej: Operativo especial en ruta" />
           </div>
-
           <div class="form-group">
             <label>División de destino</label>
             <select id="new-img-category"></select>
           </div>
-
           <div class="form-group">
             <label>O crear NUEVA División</label>
-            <input type="text" id="new-category-name" placeholder="Ej: Cargas Especiales" />
+            <input type="text" id="new-category-name" placeholder="Ej: Logística Industrial" />
           </div>
-
           <div class="form-group">
-            <label>URL de imagen o Subir archivo</label>
-            <input type="text" id="new-img-url" placeholder="./js/assets/img/nombre.jpg o link web" />
+            <label>URL de imagen o Archivo</label>
+            <input type="text" id="new-img-url" placeholder="./js/assets/img/foto.jpg" />
             <input type="file" id="new-img-file" accept="image/*" class="file-picker" />
           </div>
+          <button id="btn-save-image" class="btn-orange full-width">Guardar Imagen</button>
+        </div>
 
-          <button id="btn-save-image" class="btn-orange full-width">Guardar Imagen en el Sitio</button>
+        <!-- Textos Web (Modificar títulos y subtítulos desde el panel) -->
+        <div id="sec-textos" class="adm-section">
+          <div class="form-group">
+            <label>Título Principal (Hero)</label>
+            <input type="text" id="adm-hero-title" value="NIVEL 9 LOGÍSTICA DE EVOLUCIÓN" />
+          </div>
+          <div class="form-group">
+            <label>Subtítulo / Descripción</label>
+            <textarea id="adm-hero-subtitle" rows="3">El transporte inteligente que tu negocio y tu vida necesitan...</textarea>
+          </div>
+          <button id="btn-save-textos" class="btn-orange full-width">Actualizar Textos</button>
+        </div>
+
+        <!-- Accesos Directos (Agregar / Modificar enlaces) -->
+        <div id="sec-accesos" class="adm-section">
+          <div class="form-group">
+            <label>Nombre del Acceso / Botón</label>
+            <input type="text" id="adm-link-name" placeholder="Ej: Portal Clientes VIP" />
+          </div>
+          <div class="form-group">
+            <label>URL de Destino</label>
+            <input type="text" id="adm-link-url" placeholder="https://..." />
+          </div>
+          <button id="btn-add-link" class="btn-orange full-width">Agregar Acceso Rápido</button>
         </div>
 
         <!-- Datos pie -->
@@ -290,7 +388,7 @@
             <label>Base Operativa</label>
             <input type="text" id="adm-base" value="Base Operativa: Polo 52, Córdoba" />
           </div>
-          <button id="btn-save-footer" class="btn-orange full-width">Guardar Cambios</button>
+          <button id="btn-save-footer" class="btn-orange full-width">Guardar Cambios del Pie</button>
         </div>
       </div>
     </div>
@@ -298,5 +396,20 @@
 
   <script src="./js/config.js"></script>
   <script src="./js/motor.js"></script>
+  <script>
+    // Script adicional para el panel de configuración ampliado
+    document.addEventListener('DOMContentLoaded', () => {
+      const admTabs = document.querySelectorAll('.adm-tab');
+      admTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          admTabs.forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.adm-section').forEach(s => s.classList.remove('active'));
+          tab.classList.add('active');
+          const target = tab.getAttribute('data-adm-sec');
+          document.getElementById(target).classList.add('active');
+        });
+      });
+    });
+  </script>
 </body>
 </html>

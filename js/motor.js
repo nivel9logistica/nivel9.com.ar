@@ -1,43 +1,84 @@
-// js/motor.js - Lógica interactiva y Panel Administrador Avanzado Nivel 9
-document.addEventListener("DOMContentLoaded", () => {
-  cargarConfiguracionGuardada();
-  aplicarTextosWeb();
-  vincularEnlacesGlobales();
-  renderizarAccesosPie();
-  renderizarPestanas();
+// js/motor.js - Lógica interactiva, Sincronización en la Nube (Supabase) y Panel Admin
+const SUPABASE_URL = "https://yfrgqyezynojohqgkxjt.supabase.co";
+const SUPABASE_KEY = "sb_publishable_JAp9zWYr_ugkEkVg0WPI5A_gaA5I0sL";
+
+let supabaseClient = null;
+let pestanaActivaActual = "mudanzas";
+
+document.addEventListener("DOMContentLoaded", async () => {
+  // 1. Renderizado rápido inicial con configuración base / caché local
+  cargarConfiguracionLocal();
+  refrescarTodaLaPagina();
   inicializarVentanasServicios();
   inicializarPanelAdmin();
+
+  // 2. Conectar a Supabase y traer la última versión de la nube para todos los dispositivos
+  await inicializarSupabaseYCargarNube();
 });
 
-// 1. CARGA Y SANITIZACIÓN DE CONFIGURACIÓN
-function cargarConfiguracionGuardada() {
+// CARGA EL SDK DE SUPABASE AUTOMÁTICAMENTE Y SINCRONIZA DESDE LA NUBE
+async function inicializarSupabaseYCargarNube() {
+  try {
+    if (!window.supabase) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+
+    if (window.supabase && typeof window.supabase.createClient === "function") {
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+      const { data, error } = await supabaseClient
+        .from("configuracion_web")
+        .select("datos")
+        .eq("id", "principal")
+        .maybeSingle();
+
+      if (!error && data && data.datos) {
+         fusionarConfiguracion(data.datos);
+        localStorage.setItem("nivel9_custom_config", JSON.stringify(NIVEL9_CONFIG));
+        refrescarTodaLaPagina();
+      }
+    }
+  } catch (e) {
+    console.warn("Modo local activo (sin conexión a tabla remota aún):", e);
+  }
+}
+
+function fusionarConfiguracion(remoto) {
+  if (!remoto) return;
+  if (remoto.empresa) Object.assign(NIVEL9_CONFIG.empresa, remoto.empresa);
+  if (remoto.textosWeb) {
+    NIVEL9_CONFIG.textosWeb = Object.assign(NIVEL9_CONFIG.textosWeb || {}, remoto.textosWeb);
+  }
+  if (remoto.links) Object.assign(NIVEL9_CONFIG.links, remoto.links);
+  if (Array.isArray(remoto.accesosDirectos) && remoto.accesosDirectos.length > 0) {
+    NIVEL9_CONFIG.accesosDirectos = remoto.accesosDirectos;
+  }
+  if (remoto.servicios) {
+    NIVEL9_CONFIG.servicios = remoto.servicios;
+  }
+  sanitizarTextosPolo52();
+}
+
+function cargarConfiguracionLocal() {
   const localData = localStorage.getItem("nivel9_custom_config");
   if (localData) {
     try {
       const parsed = JSON.parse(localData);
-      if (parsed.empresa) Object.assign(NIVEL9_CONFIG.empresa, parsed.empresa);
-      if (parsed.textosWeb) {
-        NIVEL9_CONFIG.textosWeb = Object.assign(NIVEL9_CONFIG.textosWeb || {}, parsed.textosWeb);
-      }
-      if (parsed.links) Object.assign(NIVEL9_CONFIG.links, parsed.links);
-      if (Array.isArray(parsed.accesosDirectos) && parsed.accesosDirectos.length > 0) {
-        NIVEL9_CONFIG.accesosDirectos = parsed.accesosDirectos;
-      }
-      if (parsed.servicios) {
-        Object.keys(parsed.servicios).forEach((k) => {
-          if (NIVEL9_CONFIG.servicios[k]) {
-            Object.assign(NIVEL9_CONFIG.servicios[k], parsed.servicios[k]);
-          } else {
-            NIVEL9_CONFIG.servicios[k] = parsed.servicios[k];
-          }
-        });
-      }
+      fusionarConfiguracion(parsed);
     } catch (e) {
-      console.warn("Error leyendo configuración local:", e);
+      console.warn("Error leyendo caché local:", e);
     }
   }
+  sanitizarTextosPolo52();
+}
 
-  // Asegurar que no queden textos antiguos de "nave propia" en caché
+function sanitizarTextosPolo52() {
   if (NIVEL9_CONFIG.servicios && NIVEL9_CONFIG.servicios.corporativo) {
     const corp = NIVEL9_CONFIG.servicios.corporativo;
     if (/nuestra nave/i.test(corp.descripcion)) {
@@ -49,19 +90,43 @@ function cargarConfiguracionGuardada() {
       );
     }
   }
-
-  aplicarDatosEmpresa();
 }
 
-function guardarConfiguracionGlobal() {
+function refrescarTodaLaPagina() {
+  aplicarDatosEmpresa();
+  aplicarTextosWeb();
+  vincularEnlacesGlobales();
+  renderizarAccesosPie();
+  renderizarPestanas();
+  renderStage(pestanaActivaActual);
+}
+
+// GUARDA EN SUPABASE (PARA TODOS LOS CELULARES Y PC) Y EN CACHÉ LOCAL
+async function guardarConfiguracionGlobal(mensajeExito) {
   try {
     localStorage.setItem("nivel9_custom_config", JSON.stringify(NIVEL9_CONFIG));
   } catch (e) {
-    alert("La imagen es demasiado pesada para la memoria del navegador. Intentá con una imagen más liviana o por URL.");
+    console.warn("Memoria local llena, guardando en nube...");
   }
+
+  if (supabaseClient) {
+    const { error } = await supabaseClient
+      .from("configuracion_web")
+      .upsert(
+        [{ id: "principal", datos: NIVEL9_CONFIG, actualizado: new Date().toISOString() }],
+        { onConflict: "id" }
+      );
+
+    if (error) {
+      alert("Se guardó en este dispositivo, pero faltó sincronizar con Supabase: " + error.message);
+      return;
+    }
+  }
+
+  if (mensajeExito) alert(mensajeExito);
 }
 
-// 2. APLICACIÓN DE DATOS DE EMPRESA Y TEXTOS WEB
+// APLICACIÓN DE DATOS EN PANTALLA
 function aplicarDatosEmpresa() {
   const emp = NIVEL9_CONFIG.empresa;
   const elLema1 = document.getElementById("footer-lema-1");
@@ -93,7 +158,6 @@ function aplicarTextosWeb() {
   }
 }
 
-// 3. ENLACES Y ACCESOS DIRECTOS
 function vincularEnlacesGlobales() {
   const { links } = NIVEL9_CONFIG;
   const setLink = (id, url) => {
@@ -119,12 +183,9 @@ function renderizarAccesosPie() {
   `).join("");
 }
 
-// 4. PESTAÑAS Y ESCENARIO DE SERVICIOS (SIN TÍTULOS EN FOTOS)
-let pestanaActivaActual = "mudanzas";
-
+// PESTAÑAS Y VENTANAS DE SERVICIOS (FOTOS LIMPIAS SIN TÍTULOS)
 function renderizarPestanas() {
   const tabsContainer = document.getElementById("services-tabs-container");
-  const selectCategory = document.getElementById("new-img-category");
   if (!tabsContainer) return;
 
   const keys = Object.keys(NIVEL9_CONFIG.servicios);
@@ -138,13 +199,6 @@ function renderizarPestanas() {
     const isActive = k === pestanaActivaActual;
     return `<button class="tab-btn ${isActive ? 'active' : ''}" data-tab="${k}">[ ${num} ${s.nombreMenu.toUpperCase()} ]</button>`;
   }).join("");
-
-  if (selectCategory) {
-    selectCategory.innerHTML = keys.map((k) => {
-      const s = NIVEL9_CONFIG.servicios[k];
-      return `<option value="${k}">${s.nombreMenu}</option>`;
-    }).join("");
-  }
 }
 
 function renderStage(key) {
@@ -217,9 +271,7 @@ function inicializarVentanasServicios() {
   if (container) {
     container.addEventListener("click", (e) => {
       const btn = e.target.closest(".tab-btn");
-      if (btn) {
-        activarPestana(btn.getAttribute("data-tab"));
-      }
+      if (btn) activarPestana(btn.getAttribute("data-tab"));
     });
   }
 
@@ -227,19 +279,43 @@ function inicializarVentanasServicios() {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       const target = link.getAttribute("data-tab-target");
-      if (NIVEL9_CONFIG.servicios[target]) {
-        activarPestana(target);
-      }
+      if (NIVEL9_CONFIG.servicios[target]) activarPestana(target);
       const ctrlCenter = document.querySelector(".control-center");
       if (ctrlCenter) ctrlCenter.scrollIntoView({ behavior: "smooth" });
     });
   });
-
-  const firstKey = Object.keys(NIVEL9_CONFIG.servicios)[0];
-  if (firstKey) renderStage(firstKey);
 }
 
-// 5. PANEL DE ADMINISTRACIÓN AVANZADO (ENGRANAJE)
+// COMPRESOR AUTOMÁTICO DE FOTOS PARA SUBIDA RÁPIDA EN NUBE Y CELULARES
+function comprimirImagenArchivo(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const maxAncho = 1100;
+        let w = img.width;
+        let h = img.height;
+        if (w > maxAncho) {
+          h = Math.round((h * maxAncho) / w);
+          w = maxAncho;
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL("image/jpeg", 0.80));
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// PANEL DE ADMINISTRACIÓN (CON CAMBIO DE PESTAÑAS ACTIVO Y GUARDADO EN SUPABASE)
 function inicializarPanelAdmin() {
   const gearBtn = document.getElementById("admin-gear-btn");
   const modal = document.getElementById("admin-modal");
@@ -255,9 +331,26 @@ function inicializarPanelAdmin() {
 
   gearBtn.addEventListener("click", () => {
     modal.classList.add("open");
-    actualizarVistasAdmin();
+    if (panelView && panelView.style.display !== "none") {
+      construirInterfazAdminCompleta();
+    }
   });
+
   closeBtn.addEventListener("click", () => modal.classList.remove("open"));
+
+  // ACTIVADOR DE LAS 4 PESTAÑAS DEL ENGRANAJE (FOTOS / TEXTOS WEB / ACCESOS / PIE)
+  const admTabs = document.querySelectorAll(".adm-tab");
+  admTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      admTabs.forEach((t) => t.classList.remove("active"));
+      document.querySelectorAll(".adm-section").forEach((s) => s.classList.remove("active"));
+
+      tab.classList.add("active");
+      const targetId = tab.getAttribute("data-adm-sec");
+      const targetSec = document.getElementById(targetId);
+      if (targetSec) targetSec.classList.add("active");
+    });
+  });
 
   submitLogin.addEventListener("click", () => {
     if (userInput.value.trim().toLowerCase() === "admin" && passInput.value.trim() === "2468") {
@@ -277,7 +370,7 @@ function construirInterfazAdminCompleta() {
   const secAccesos = document.getElementById("sec-accesos");
   const secDatos = document.getElementById("sec-datos");
 
-  // A. Pestaña FOTOS (Agregar + Lista para eliminar fotos o divisiones)
+  // 1. PESTAÑA FOTOS
   if (secFotos) {
     secFotos.innerHTML = `
       <div class="form-group">
@@ -289,11 +382,11 @@ function construirInterfazAdminCompleta() {
         <input type="text" id="new-category-name" placeholder="Ej: Logística Industrial" />
       </div>
       <div class="form-group">
-        <label>URL de imagen o Subir desde tu PC</label>
+        <label>URL de imagen o Subir foto desde tu PC / Celular</label>
         <input type="text" id="new-img-url" placeholder="./js/assets/img/foto.jpg o link https://" />
         <input type="file" id="new-img-file" accept="image/*" class="file-picker" style="margin-top:8px;" />
       </div>
-      <button id="btn-save-image" class="btn-orange full-width">Guardar y Mostrar Imagen</button>
+      <button id="btn-save-image" class="btn-orange full-width">Guardar y Publicar Imagen</button>
       <hr style="border:0; border-top:1px solid #3f3f46; margin:16px 0;" />
       <label style="display:block; font-size:0.85rem; color:#a1a1aa; margin-bottom:8px;">Fotos actuales en esta división:</label>
       <div id="admin-current-photos-list" style="display:flex; gap:10px; flex-wrap:wrap; max-height:150px; overflow-y:auto;"></div>
@@ -323,7 +416,8 @@ function construirInterfazAdminCompleta() {
     catSelect.addEventListener("change", renderListaFotosAdmin);
     renderListaFotosAdmin();
 
-    document.getElementById("btn-save-image").addEventListener("click", () => {
+    document.getElementById("btn-save-image").addEventListener("click", async () => {
+      const btn = document.getElementById("btn-save-image");
       let catKey = catSelect.value;
       const newCatName = document.getElementById("new-category-name").value.trim();
       const fileInput = document.getElementById("new-img-file");
@@ -347,35 +441,38 @@ function construirInterfazAdminCompleta() {
         }
       }
 
-      const procesarGuardadoImagen = (imgSrc) => {
+      const procesarGuardadoImagen = async (imgSrc) => {
+        btn.disabled = true;
+        btn.textContent = "Sincronizando en la nube...";
         const srv = NIVEL9_CONFIG.servicios[catKey];
         if (!Array.isArray(srv.galeria)) srv.galeria = [];
         srv.galeria.push({ url: imgSrc, titulo: "" });
-        srv.imagenPrincipal = imgSrc; // La muestra como principal inmediatamente
+        srv.imagenPrincipal = imgSrc;
 
-        guardarConfiguracionGlobal();
         renderizarPestanas();
         renderStage(catKey);
         renderListaFotosAdmin();
+        await guardarConfiguracionGlobal("¡Imagen publicada en todos los dispositivos!");
+
         urlInput.value = "";
         fileInput.value = "";
         document.getElementById("new-category-name").value = "";
-        alert("¡Imagen agregada y visible en " + srv.nombreMenu + "!");
+        btn.disabled = false;
+        btn.textContent = "Guardar y Publicar Imagen";
       };
 
       if (fileInput.files && fileInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (e) => procesarGuardadoImagen(e.target.result);
-        reader.readAsDataURL(fileInput.files[0]);
+        const b64Optimizada = await comprimirImagenArchivo(fileInput.files[0]);
+        await procesarGuardadoImagen(b64Optimizada);
       } else if (urlInput.value.trim()) {
-        procesarGuardadoImagen(urlInput.value.trim());
+        await procesarGuardadoImagen(urlInput.value.trim());
       } else {
-        alert("Seleccioná una imagen de tu PC o pegá una URL.");
+        alert("Seleccioná una imagen o pegá una URL.");
       }
     });
   }
 
-  // B. Pestaña TEXTOS WEB (Portada, Células de trabajo y Textos de cada División)
+  // 2. PESTAÑA TEXTOS WEB
   if (secTextos) {
     const t = NIVEL9_CONFIG.textosWeb || {};
     const keys = Object.keys(NIVEL9_CONFIG.servicios);
@@ -425,7 +522,7 @@ function construirInterfazAdminCompleta() {
           <input type="text" id="adm-serv-btn" />
         </div>
       </div>
-      <button id="btn-save-all-textos" class="btn-orange full-width" style="margin-top:12px;">Guardar Todos los Textos</button>
+      <button id="btn-save-all-textos" class="btn-orange full-width" style="margin-top:12px;">Guardar y Publicar Textos</button>
     `;
 
     const servSelect = document.getElementById("adm-serv-select");
@@ -440,7 +537,11 @@ function construirInterfazAdminCompleta() {
     servSelect.addEventListener("change", cargarCamposServicio);
     cargarCamposServicio();
 
-    document.getElementById("btn-save-all-textos").addEventListener("click", () => {
+    document.getElementById("btn-save-all-textos").addEventListener("click", async () => {
+      const btn = document.getElementById("btn-save-all-textos");
+      btn.disabled = true;
+      btn.textContent = "Guardando en la nube...";
+
       NIVEL9_CONFIG.textosWeb = {
         badgeHero: "OPERACIONES LOGÍSTICAS NACIONALES",
         subtituloHero: document.getElementById("adm-hero-sub").value.trim(),
@@ -463,14 +564,15 @@ function construirInterfazAdminCompleta() {
         NIVEL9_CONFIG.servicios[sk].botonTexto = document.getElementById("adm-serv-btn").value.trim();
       }
 
-      guardarConfiguracionGlobal();
       aplicarTextosWeb();
       renderStage(sk);
-      alert("¡Textos de la página actualizados correctamente!");
+      await guardarConfiguracionGlobal("¡Textos publicados en todos los dispositivos!");
+      btn.disabled = false;
+      btn.textContent = "Guardar y Publicar Textos";
     });
   }
 
-  // C. Pestaña ACCESOS DIRECTOS
+  // 3. PESTAÑA ACCESOS DIRECTOS
   if (secAccesos) {
     secAccesos.innerHTML = `
       <div class="form-group">
@@ -488,7 +590,7 @@ function construirInterfazAdminCompleta() {
         <input type="text" id="adm-link-name" placeholder="Nombre (Ej: Seguimiento Satelital)" style="margin-bottom:6px;" />
         <input type="text" id="adm-link-url" placeholder="https://..." />
       </div>
-      <button id="btn-add-link" class="btn-orange full-width">Agregar Acceso Directo</button>
+      <button id="btn-add-link" class="btn-orange full-width">Agregar y Publicar Acceso</button>
       <div id="adm-accesos-list" style="margin-top:12px; max-height:110px; overflow-y:auto;"></div>
     `;
 
@@ -504,30 +606,29 @@ function construirInterfazAdminCompleta() {
     };
     renderListaAccesosAdmin();
 
-    document.getElementById("btn-save-main-links").addEventListener("click", () => {
+    document.getElementById("btn-save-main-links").addEventListener("click", async () => {
       NIVEL9_CONFIG.links.cotizador = document.getElementById("adm-url-cotizador").value.trim();
       NIVEL9_CONFIG.links.portalPublico = document.getElementById("adm-url-portal").value.trim();
-      guardarConfiguracionGlobal();
       vincularEnlacesGlobales();
       renderStage(pestanaActivaActual);
-      alert("¡Links principales actualizados!");
+      await guardarConfiguracionGlobal("¡Links principales actualizados en todos los dispositivos!");
     });
 
-    document.getElementById("btn-add-link").addEventListener("click", () => {
+    document.getElementById("btn-add-link").addEventListener("click", async () => {
       const name = document.getElementById("adm-link-name").value.trim();
       const url = document.getElementById("adm-link-url").value.trim();
       if (!name || !url) return alert("Completá el nombre y el link.");
       if (!Array.isArray(NIVEL9_CONFIG.accesosDirectos)) NIVEL9_CONFIG.accesosDirectos = [];
       NIVEL9_CONFIG.accesosDirectos.push({ nombre: name, url: url, destacado: false });
-      guardarConfiguracionGlobal();
       renderizarAccesosPie();
       renderListaAccesosAdmin();
       document.getElementById("adm-link-name").value = "";
       document.getElementById("adm-link-url").value = "";
+      await guardarConfiguracionGlobal("¡Acceso directo agregado en todos los dispositivos!");
     });
   }
 
-  // D. Pestaña PIE DE PÁGINA + RESTAURAR FÁBRICA
+  // 4. PESTAÑA PIE DE PÁGINA
   if (secDatos) {
     secDatos.innerHTML = `
       <div class="form-group">
@@ -542,53 +643,33 @@ function construirInterfazAdminCompleta() {
         <label>Base Operativa</label>
         <input type="text" id="adm-base" value="${NIVEL9_CONFIG.empresa.baseOperativa || ""}" />
       </div>
-      <button id="btn-save-footer" class="btn-orange full-width">Guardar Cambios del Pie</button>
-      <hr style="border:0; border-top:1px solid #3f3f46; margin:16px 0;" />
-      <button id="btn-reset-factory" type="button" style="width:100%; padding:10px; background:#27272a; color:#f87171; border:1px solid #ef4444; border-radius:8px; font-weight:700; cursor:pointer;">
-        Restaurar Valores Originales de Fábrica
-      </button>
+      <button id="btn-save-footer" class="btn-orange full-width">Guardar y Publicar Pie</button>
     `;
 
-    document.getElementById("btn-save-footer").addEventListener("click", () => {
+    document.getElementById("btn-save-footer").addEventListener("click", async () => {
       NIVEL9_CONFIG.empresa.lema1 = document.getElementById("adm-lema-1").value.trim();
       NIVEL9_CONFIG.empresa.lema2 = document.getElementById("adm-lema-2").value.trim();
       NIVEL9_CONFIG.empresa.baseOperativa = document.getElementById("adm-base").value.trim();
-      guardarConfiguracionGlobal();
       aplicarDatosEmpresa();
-      alert("¡Datos del pie actualizados!");
-    });
-
-    document.getElementById("btn-reset-factory").addEventListener("click", () => {
-      if (confirm("¿Seguro que querés restaurar los textos y fotos originales del código?")) {
-        localStorage.removeItem("nivel9_custom_config");
-        localStorage.removeItem("n9_custom_hero_subtitle");
-        window.location.reload();
-      }
+      await guardarConfiguracionGlobal("¡Datos del pie publicados en todos los dispositivos!");
     });
   }
 }
 
-function actualizarVistasAdmin() {
-  const panelView = document.getElementById("admin-panel-view");
-  if (panelView && panelView.style.display !== "none") {
-    construirInterfazAdminCompleta();
-  }
-}
-
-window.eliminarFotoAdmin = function(catKey, index) {
+window.eliminarFotoAdmin = async function(catKey, index) {
   const srv = NIVEL9_CONFIG.servicios[catKey];
   if (!srv || !Array.isArray(srv.galeria)) return;
   srv.galeria.splice(index, 1);
   srv.imagenPrincipal = srv.galeria[0] ? (srv.galeria[0].url || srv.galeria[0]) : "";
-  guardarConfiguracionGlobal();
   renderStage(catKey);
   construirInterfazAdminCompleta();
+  await guardarConfiguracionGlobal("Foto eliminada.");
 };
 
-window.eliminarAccesoAdmin = function(index) {
+window.eliminarAccesoAdmin = async function(index) {
   if (!Array.isArray(NIVEL9_CONFIG.accesosDirectos)) return;
   NIVEL9_CONFIG.accesosDirectos.splice(index, 1);
-  guardarConfiguracionGlobal();
   renderizarAccesosPie();
   construirInterfazAdminCompleta();
+  await guardarConfiguracionGlobal("Acceso eliminado.");
 };

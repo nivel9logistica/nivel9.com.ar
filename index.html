@@ -4,109 +4,156 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NIVEL 9 | Logística de Excelencia</title>
-  <meta name="description" content="Transporte inteligente, distribución y gran presencia en Polo 52, Córdoba. Cobertura federal." />
+  <meta name="description" content="Transporte inteligente, distribución y gran presencia operativa en Polo 52, Córdoba. Cobertura federal." />
+  <!-- Ícono integrado para eliminar el error 404 de favicon.ico -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23111113' stroke='%23ea580c' stroke-width='3'/><text x='8' y='44' font-family='Arial,sans-serif' font-weight='900' font-size='32' fill='%23ffffff'>N</text><text x='33' y='44' font-family='Arial,sans-serif' font-weight='900' font-size='32' fill='%23ea580c'>9</text></svg>" />
   <link rel="stylesheet" href="./css/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet" />
   <style>
-    /* 1. Logo 50% más grande */
-    .brand-text { font-size: 2.2rem !important; font-weight: 800 !important; }
-    
-    /* Ocultar títulos/nombres flotantes sobre las fotos en la sección de galería/stage */
-    .photo-badge, .img-tag, .card-tag, .badge-overlay, .tag-overlay, .image-label, .caption-overlay {
-      display: none !important;
+    /* 1. Logo 50% más grande en la barra superior */
+    .navbar .brand-text {
+      font-size: 2.35rem !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.5px !important;
+      line-height: 1 !important;
     }
 
-    /* 2. Fondo mapa de Argentina con rutas y monitoreo visible */
+    /* 2. Mapa de Argentina y telemetría visibles en el fondo */
     .telemetry-map-bg {
-      background-image: radial-gradient(circle at 50% 50%, rgba(234, 88, 12, 0.08) 0%, rgba(17, 17, 19, 0.95) 70%),
-                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" opacity="0.18"><path d="M400,100 C430,150 460,200 450,280 C440,350 480,420 500,500 C520,580 490,650 470,720 C450,790 420,860 380,900 C360,850 390,780 400,700 C410,620 380,550 360,480 C340,410 350,340 370,270 C390,200 380,140 400,100 Z" fill="%23ea580c"/></svg>');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
+      opacity: 1 !important;
+      z-index: 1 !important;
+      pointer-events: none !important;
+    }
+    .telemetry-svg {
+      opacity: 1 !important;
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+    }
+    .hero-container {
+      position: relative !important;
+      z-index: 2 !important;
     }
 
-    /* 3. Cuadro de confianza de la derecha con fondo de imagen (Gemini_Generated_Image.jpeg) sutil */
+    /* 3. Cuadro derecho con la imagen de fondo suave sin tapar el texto */
     .trust-cells-panel {
-      background: linear-gradient(rgba(24, 24, 27, 0.88), rgba(24, 24, 27, 0.94)), url('./Gemini_Generated_Image.jpeg');
-      background-size: cover;
-      background-position: center;
-      border: 1px solid #3f3f46;
-      border-radius: 20px;
-      padding: 30px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      background-image: linear-gradient(135deg, rgba(17, 17, 19, 0.84) 0%, rgba(24, 24, 27, 0.90) 100%),
+                        url('./js/assets/Gemini_Generated_Image.jpeg'),
+                        url('./js/assets/img/mudanza-operarios.jpg') !important;
+      background-size: cover !important;
+      background-position: center center !important;
+      background-repeat: no-repeat !important;
+      border: 1px solid rgba(234, 88, 12, 0.45) !important;
+      border-radius: 20px !important;
+      padding: 28px !important;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.75) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 16px !important;
+      position: relative !important;
+      overflow: hidden !important;
     }
     .trust-cell-item {
-      border-left: 3px solid #ea580c;
-      padding-left: 15px;
-      background: rgba(17, 17, 19, 0.6);
-      padding: 12px 15px;
-      border-radius: 0 10px 10px 0;
+      border-left: 3px solid #ea580c !important;
+      background: rgba(12, 12, 14, 0.72) !important;
+      backdrop-filter: blur(4px) !important;
+      padding: 14px 16px !important;
+      border-radius: 0 12px 12px 0 !important;
     }
     .trust-cell-item h4 {
-      color: #ffffff;
-      font-size: 1.1rem;
-      font-weight: 800;
-      margin-bottom: 5px;
+      color: #ffffff !important;
+      font-size: 1.08rem !important;
+      font-weight: 800 !important;
+      margin: 0 0 5px 0 !important;
     }
     .trust-cell-item p {
-      color: #a1a1aa;
-      font-size: 0.92rem;
-      line-height: 1.5;
-      margin: 0;
+      color: #d4d4d8 !important;
+      font-size: 0.92rem !important;
+      line-height: 1.48 !important;
+      margin: 0 !important;
     }
 
-    /* 4. Botones de WhatsApp simétricos, icón verde, recuadro línea naranja y fondo negro, texto mantenido */
+    /* 4. Botones de WhatsApp simétricos: fondo negro, línea naranja, ícono verde */
+    .wsp-buttons-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(240px, 285px)) !important;
+      gap: 16px !important;
+      margin-top: 22px !important;
+    }
+    @media (max-width: 640px) {
+      .wsp-buttons-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
     .wsp-orange-box-btn {
-      background: #111113 !important;
+      background: #0d0d0f !important;
       border: 2px solid #ea580c !important;
-      border-radius: 14px;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
+      border-radius: 14px !important;
+      padding: 14px 16px !important;
+      min-height: 74px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 14px !important;
+      text-decoration: none !important;
       color: #ffffff !important;
-      width: 100%;
-      max-width: 290px;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 15px rgba(234, 88, 12, 0.2);
+      width: 100% !important;
+      box-sizing: border-box !important;
+      transition: all 0.25s ease !important;
+      box-shadow: 0 4px 15px rgba(234, 88, 12, 0.18) !important;
     }
     .wsp-orange-box-btn:hover {
-      background: rgba(234, 88, 12, 0.1) !important;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(234, 88, 12, 0.4);
+      background: rgba(234, 88, 12, 0.12) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 22px rgba(234, 88, 12, 0.38) !important;
     }
     .wsp-green-icon-box {
       background: #25D366 !important;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 2px 10px rgba(37, 211, 102, 0.4);
+      width: 44px !important;
+      height: 44px !important;
+      border-radius: 50% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+      box-shadow: 0 2px 10px rgba(37, 211, 102, 0.4) !important;
     }
     .wsp-btn-text-content {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.3;
-      text-align: left;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      line-height: 1.3 !important;
+      text-align: left !important;
     }
     .wsp-btn-text-content strong {
-      font-size: 0.98rem;
-      font-weight: 800;
-      color: #ffffff;
+      font-size: 0.96rem !important;
+      font-weight: 800 !important;
+      color: #ffffff !important;
+      display: block !important;
     }
     .wsp-btn-text-content small {
-      font-size: 0.8rem;
-      color: #a1a1aa;
+      font-size: 0.82rem !important;
+      color: #a1a1aa !important;
+      display: block !important;
+      margin-top: 2px !important;
+    }
+
+    /* 5. Ocultar cualquier cartel o título encima de las fotos */
+    .photo-badge, .img-tag, .card-tag, .badge-overlay, .tag-overlay, .image-label, .caption-overlay,
+    #service-stage figcaption,
+    #service-stage [class*="badge"],
+    #service-stage [class*="caption"],
+    #service-stage [class*="label"],
+    #service-stage [class*="tag"],
+    .n9-hidden-photo-label {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      pointer-events: none !important;
     }
   </style>
 </head>
@@ -127,7 +174,6 @@
         <span class="brand-text">NIVEL <span>9</span></span>
       </a>
 
-      <!-- Menú superior -->
       <nav class="nav-menu">
         <button class="nav-link" data-tab-target="mudanzas">Mudanzas</button>
         <button class="nav-link" data-tab-target="corporativo">Corporativo B2B</button>
@@ -135,7 +181,6 @@
         <a id="btn-header-cotizador" href="#" class="nav-link special" target="_blank">Autocotizador</a>
       </nav>
 
-      <!-- Botón WhatsApp Superior -->
       <a id="btn-header-wsp" href="https://wa.me/5493517046541?text=Hola%20Nivel%209,%20quiero%20cotizar%20un%20servicio" class="btn-primary" target="_blank">
         <span>COTIZAR POR WHATSAPP</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
@@ -146,52 +191,83 @@
   <!-- PANTALLA PRINCIPAL / HERO -->
   <main class="hero-section">
     
-    <!-- FONDO DE MAPA DE ARGENTINA / RUTAS Y MONITOREO SATELITAL -->
+    <!-- FONDO DE MAPA DE ARGENTINA CON RUTAS NACIONALES Y RADAR EN CÓRDOBA -->
     <div class="telemetry-map-bg">
-      <svg viewBox="0 0 1400 900" class="telemetry-svg">
+      <svg viewBox="0 0 1400 900" class="telemetry-svg" preserveAspectRatio="xMidYMid slice">
         <defs>
           <filter id="glow-orange" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feGaussianBlur stdDeviation="4" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          <clipPath id="clip-argentina">
+            <path d="M 669.0,98.9 L 682.3,105.2 L 708.0,106.3 L 721.3,104.0 L 741.8,104.0 L 775.6,138.5 L 806.4,161.5 L 844.3,178.8 L 823.8,215.6 L 825.8,227.1 L 861.7,229.3 L 881.2,225.9 L 907.8,186.8 L 926.3,194.8 L 922.2,221.3 L 886.3,244.3 L 865.8,269.6 L 845.3,292.6 L 838.1,320.2 L 828.9,357.0 L 827.9,380.0 L 829.9,393.8 L 854.5,407.6 L 850.4,420.2 L 863.8,432.9 L 861.7,449.0 L 846.3,472.0 L 822.8,484.6 L 785.9,493.9 L 753.1,492.7 L 753.1,506.5 L 735.6,536.4 L 693.6,542.1 L 708.0,566.3 L 722.3,566.3 L 721.3,583.6 L 704.9,581.2 L 692.6,593.9 L 687.5,621.5 L 664.9,635.3 L 642.4,652.5 L 642.4,667.5 L 678.2,683.6 L 667.0,706.6 L 638.2,731.9 L 623.9,750.3 L 609.6,784.8 L 624.9,802.0 L 619.8,809.0 L 638.2,835.4 L 689.5,855.0 L 662.9,861.9 L 619.8,859.5 L 618.8,809.0 L 595.2,798.6 L 552.1,794.0 L 544.0,775.6 L 525.5,754.9 L 529.6,725.0 L 546.0,690.5 L 555.2,656.0 L 558.3,621.5 L 554.2,587.0 L 553.2,543.3 L 560.4,506.5 L 568.6,472.0 L 578.8,437.5 L 591.1,391.5 L 589.1,348.9 L 590.1,299.5 L 598.3,253.5 L 621.9,219.0 L 622.9,177.6 L 647.5,150.0 L 650.6,124.7 L 669.0,98.9 Z" />
+          </clipPath>
         </defs>
 
-        <!-- Silueta mapa de Argentina visible -->
-        <g class="argentina-outline-map" opacity="0.4">
-          <path d="M660,140 L700,220 L730,340 L710,430 L670,540 L640,660 L590,770 L570,830 L530,790 L550,710 L610,570 L650,440 L630,310 L660,140 Z" fill="rgba(234, 88, 12, 0.05)" stroke="#ea580c" stroke-width="2" stroke-dasharray="5,5" />
-        </g>
-
-        <!-- Red troncal nacional con centro en Córdoba (720, 420) -->
-        <g class="network-routes" filter="url(#glow-orange)">
-          <line x1="720" y1="420" x2="890" y2="490" class="route-line primary" />
-          <line x1="890" y1="490" x2="980" y2="520" class="route-line primary" />
-          <line x1="720" y1="420" x2="540" y2="480" class="route-line" />
-          <line x1="720" y1="420" x2="680" y2="240" class="route-line" />
-          <line x1="680" y1="240" x2="640" y2="120" class="route-line" />
-          <line x1="720" y1="420" x2="650" y2="670" class="route-line" />
-          <line x1="650" y1="670" x2="770" y2="720" class="route-line" />
-          <line x1="650" y1="670" x2="580" y2="820" class="route-line" />
-        </g>
-
-        <!-- Nodos lumínicos y anillos de monitoreo -->
-        <g class="network-nodes">
-          <circle cx="980" cy="520" r="6" class="node-dot" />
-          <circle cx="890" cy="490" r="5" class="node-dot" />
-          <circle cx="540" cy="480" r="5" class="node-dot" />
-          <circle cx="680" cy="240" r="5" class="node-dot" />
-          <circle cx="640" cy="120" r="4" class="node-dot" />
-          <circle cx="650" cy="670" r="5" class="node-dot" />
-          <circle cx="770" cy="720" r="4" class="node-dot" />
-          <circle cx="580" cy="820" r="4" class="node-dot" />
+        <!-- Silueta Geográfica de la República Argentina + Islas Malvinas -->
+        <g class="argentina-map-layer" style="opacity: 1 !important;">
+          <path d="M 669.0,98.9 L 682.3,105.2 L 708.0,106.3 L 721.3,104.0 L 741.8,104.0 L 775.6,138.5 L 806.4,161.5 L 844.3,178.8 L 823.8,215.6 L 825.8,227.1 L 861.7,229.3 L 881.2,225.9 L 907.8,186.8 L 926.3,194.8 L 922.2,221.3 L 886.3,244.3 L 865.8,269.6 L 845.3,292.6 L 838.1,320.2 L 828.9,357.0 L 827.9,380.0 L 829.9,393.8 L 854.5,407.6 L 850.4,420.2 L 863.8,432.9 L 861.7,449.0 L 846.3,472.0 L 822.8,484.6 L 785.9,493.9 L 753.1,492.7 L 753.1,506.5 L 735.6,536.4 L 693.6,542.1 L 708.0,566.3 L 722.3,566.3 L 721.3,583.6 L 704.9,581.2 L 692.6,593.9 L 687.5,621.5 L 664.9,635.3 L 642.4,652.5 L 642.4,667.5 L 678.2,683.6 L 667.0,706.6 L 638.2,731.9 L 623.9,750.3 L 609.6,784.8 L 624.9,802.0 L 619.8,809.0 L 638.2,835.4 L 689.5,855.0 L 662.9,861.9 L 619.8,859.5 L 618.8,809.0 L 595.2,798.6 L 552.1,794.0 L 544.0,775.6 L 525.5,754.9 L 529.6,725.0 L 546.0,690.5 L 555.2,656.0 L 558.3,621.5 L 554.2,587.0 L 553.2,543.3 L 560.4,506.5 L 568.6,472.0 L 578.8,437.5 L 591.1,391.5 L 589.1,348.9 L 590.1,299.5 L 598.3,253.5 L 621.9,219.0 L 622.9,177.6 L 647.5,150.0 L 650.6,124.7 L 669.0,98.9 Z" fill="rgba(234, 88, 12, 0.10)" stroke="#ea580c" stroke-width="2.2" stroke-linejoin="round" opacity="0.75" filter="url(#glow-orange)" />
           
-          <!-- Hub central Córdoba (Polo 52) -->
-          <circle cx="720" cy="420" r="45" class="hub-radar-ring" stroke="#ea580c" stroke-width="1.5" fill="none" opacity="0.7" />
-          <circle cx="720" cy="420" r="28" class="hub-radar-ring" />
-          <circle cx="720" cy="420" r="14" class="hub-radar-pulse" />
-          <circle cx="720" cy="420" r="7" class="hub-center-core" />
+          <path d="M 783.8,780.2 L 806.4,777.9 L 804.3,796.3 L 779.7,798.6 Z" fill="rgba(234, 88, 12, 0.12)" stroke="#ea580c" stroke-width="1.8" opacity="0.75" />
+          <path d="M 816.6,777.9 L 841.2,780.2 L 831.0,800.9 L 810.5,796.3 Z" fill="rgba(234, 88, 12, 0.12)" stroke="#ea580c" stroke-width="1.8" opacity="0.75" />
+
+          <!-- Grilla satelital interna -->
+          <g clip-path="url(#clip-argentina)">
+            <line x1="500" y1="173.0" x2="920" y2="173.0" stroke="#ea580c" stroke-width="0.7" stroke-dasharray="3,6" opacity="0.35" />
+            <line x1="500" y1="288.0" x2="920" y2="288.0" stroke="#ea580c" stroke-width="0.7" stroke-dasharray="3,6" opacity="0.35" />
+            <line x1="500" y1="403.0" x2="920" y2="403.0" stroke="#ea580c" stroke-width="0.7" stroke-dasharray="3,6" opacity="0.35" />
+            <line x1="500" y1="518.0" x2="920" y2="518.0" stroke="#ea580c" stroke-width="0.7" stroke-dasharray="3,6" opacity="0.35" />
+            <line x1="500" y1="633.0" x2="920" y2="633.0" stroke="#ea580c" stroke-width="0.7" stroke-dasharray="3,6" opacity="0.35" />
+            <line x1="500" y1="748.0" x2="920" y2="748.0" stroke="#ea580c" stroke-width="0.7" stroke-dasharray="3,6" opacity="0.35" />
+            <line x1="591.1" y1="80" x2="591.1" y2="870" stroke="#ea580c" stroke-width="0.7" stroke-dasharray="3,6" opacity="0.35" />
+            <line x1="673.1" y1="80" x2="673.1" y2="870" stroke="#ea580c" stroke-width="0.7" stroke-dasharray="3,6" opacity="0.35" />
+            <line x1="755.1" y1="80" x2="755.1" y2="870" stroke="#ea580c" stroke-width="0.7" stroke-dasharray="3,6" opacity="0.35" />
+            <line x1="837.1" y1="80" x2="837.1" y2="870" stroke="#ea580c" stroke-width="0.7" stroke-dasharray="3,6" opacity="0.35" />
+          </g>
+        </g>
+
+        <!-- Red troncal nacional con centro en Córdoba (710, 321) -->
+        <g class="network-routes" filter="url(#glow-orange)" style="opacity: 1 !important;">
+          <line x1="710" y1="321" x2="783" y2="356" class="route-line primary" stroke="#ea580c" stroke-width="2.4" />
+          <line x1="783" y1="356" x2="829" y2="394" class="route-line primary" stroke="#ea580c" stroke-width="2.4" />
+          <line x1="710" y1="321" x2="615" y2="355" class="route-line" stroke="#ea580c" stroke-width="2" />
+          <line x1="710" y1="321" x2="689" y2="215" class="route-line" stroke="#ea580c" stroke-width="2" />
+          <line x1="689" y1="215" x2="688" y2="162" class="route-line" stroke="#ea580c" stroke-width="1.8" />
+          <line x1="710" y1="321" x2="817" y2="229" class="route-line" stroke="#ea580c" stroke-width="1.8" stroke-dasharray="5,5" />
+          <line x1="817" y1="229" x2="880" y2="227" class="route-line" stroke="#ea580c" stroke-width="1.8" stroke-dasharray="5,5" />
+          <line x1="710" y1="321" x2="631" y2="494" class="route-line primary" stroke="#ea580c" stroke-width="2.2" />
+          <line x1="631" y1="494" x2="564" y2="544" class="route-line" stroke="#ea580c" stroke-width="1.6" />
+          <line x1="710" y1="321" x2="750" y2="489" class="route-line" stroke="#ea580c" stroke-width="1.8" stroke-dasharray="4,4" />
+          <line x1="750" y1="489" x2="688" y2="593" class="route-line" stroke="#ea580c" stroke-width="1.8" />
+          <line x1="631" y1="494" x2="642" y2="653" class="route-line" stroke="#ea580c" stroke-width="1.8" />
+          <line x1="642" y1="653" x2="607" y2="785" class="route-line" stroke="#ea580c" stroke-width="1.6" stroke-dasharray="4,4" />
+          <line x1="607" y1="785" x2="626" y2="858" class="route-line" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="3,4" />
+        </g>
+
+        <!-- Nodos lumínicos y Radar Central en Córdoba (Polo 52) -->
+        <g class="network-nodes" style="opacity: 1 !important;">
+          <circle cx="829" cy="394" r="6" class="node-dot" fill="#ea580c" />
+          <circle cx="783" cy="356" r="5" class="node-dot" fill="#ea580c" />
+          <circle cx="615" cy="355" r="5" class="node-dot" fill="#ea580c" />
+          <circle cx="689" cy="215" r="5" class="node-dot" fill="#ea580c" />
+          <circle cx="688" cy="162" r="4.5" class="node-dot" fill="#ea580c" />
+          <circle cx="817" cy="229" r="4.5" class="node-dot" fill="#ea580c" />
+          <circle cx="880" cy="227" r="4.5" class="node-dot" fill="#ea580c" />
+          <circle cx="631" cy="494" r="5.5" class="node-dot" fill="#ea580c" />
+          <circle cx="564" cy="544" r="4" class="node-dot" fill="#ea580c" />
+          <circle cx="750" cy="489" r="4.5" class="node-dot" fill="#ea580c" />
+          <circle cx="688" cy="593" r="4" class="node-dot" fill="#ea580c" />
+          <circle cx="642" cy="653" r="4.5" class="node-dot" fill="#ea580c" />
+          <circle cx="607" cy="785" r="4" class="node-dot" fill="#ea580c" />
+          <circle cx="626" cy="858" r="4" class="node-dot" fill="#ea580c" />
+          
+          <circle cx="710" cy="321" r="46" class="hub-radar-ring" stroke="#ea580c" stroke-width="1.4" fill="none" opacity="0.65" />
+          <circle cx="710" cy="321" r="28" class="hub-radar-ring" stroke="#ea580c" stroke-width="1.8" fill="rgba(234, 88, 12, 0.12)" />
+          <circle cx="710" cy="321" r="14" class="hub-radar-pulse" fill="rgba(234, 88, 12, 0.35)" />
+          <circle cx="710" cy="321" r="7" class="hub-center-core" fill="#ea580c" />
         </g>
       </svg>
     </div>
@@ -217,13 +293,12 @@
           <a id="btn-hero-portal" href="#" class="btn-outline" target="_blank">[ PORTAL CARGAS / B2B ]</a>
         </div>
 
-        <!-- DOBLE BOTÓN DE WHATSAPP SIMÉTRICOS (FONDO NEGRO, LÍNEA NARANJA, ÍCONO VERDE) -->
-        <div class="wsp-blue-circles-row" style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+        <!-- DOBLE BOTÓN DE WHATSAPP SIMÉTRICOS (FONDO NEGRO, BORDE NARANJA, ÍCONO VERDE) -->
+        <div class="wsp-buttons-grid">
           
-          <!-- Botón 1 -->
-          <a href="https://wa.me/5493517046541?text=Hola%20Nivel%209,%20me%20comunico%20para%20consultas%20generales." target="_blank" class="wsp-orange-box-btn">
+          <a href="https://wa.me/5493517046541?text=Hola%20Nivel%209,%20me%20comunico%20con%20Operaciones%20Gerencia." target="_blank" class="wsp-orange-box-btn">
             <div class="wsp-green-icon-box">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24z"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24z"/></svg>
             </div>
             <div class="wsp-btn-text-content">
               <strong>Operaciones gerencia</strong>
@@ -231,10 +306,9 @@
             </div>
           </a>
 
-          <!-- Botón 2 -->
-          <a href="https://wa.me/5493516643875?text=Hola%20Nivel%209,%20me%20comunico%20con%20administración." target="_blank" class="wsp-orange-box-btn">
+          <a href="https://wa.me/5493516643875?text=Hola%20Nivel%209,%20me%20comunico%20con%20Administraci%C3%B3n%20de%20Operaciones." target="_blank" class="wsp-orange-box-btn">
             <div class="wsp-green-icon-box">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24z"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24z"/></svg>
             </div>
             <div class="wsp-btn-text-content">
               <strong>Administración de operaciones</strong>
@@ -246,12 +320,12 @@
 
       </div>
 
-      <!-- Columna derecha: Células de Trabajo con fondo de imagen sutil -->
+      <!-- Columna derecha: Células de Trabajo con imagen de fondo -->
       <div class="hero-media">
         <div class="trust-cells-panel">
-          <div class="ai-header" style="border-bottom: 1px solid #3f3f46; padding-bottom: 10px; margin-bottom: 5px;">
+          <div class="ai-header" style="border-bottom: 1px solid rgba(255,255,255,0.18); padding-bottom: 10px; margin-bottom: 4px;">
             <span class="pulse-dot"></span>
-            <span class="ai-label">EXCELENCIA OPERATIVA & CONFIANZA</span>
+            <span class="ai-label">EXCELENCIA OPERATIVA &amp; CONFIANZA</span>
           </div>
 
           <div class="trust-cell-item">
@@ -261,12 +335,12 @@
 
           <div class="trust-cell-item">
             <h4>Soluciones Corporativas B2B</h4>
-            <p>Estructura logística y gran presencia en Polo 52 para abastecimiento comercial, cross-docking y distribución capilar.</p>
+            <p>Estructura logística y gran presencia operativa en Polo 52 para abastecimiento comercial, cross-docking y distribución capilar.</p>
           </div>
 
           <div class="trust-cell-item">
             <h4>Larga Distancia Federal</h4>
-            <p>Conexión directa desde Córdoba hacia todo el país con monitoreo continuo y transportistas validados.</p>
+            <p>Conexión directa desde Córdoba hacia todo el país con monitoreo continuo y unidades habilitadas.</p>
           </div>
         </div>
       </div>
@@ -282,10 +356,7 @@
       <p class="section-desc">Seleccioná una división para ver fotos reales, equipamiento y accesos directos.</p>
     </div>
 
-    <!-- Pestañas -->
     <div class="tabs-bar" id="services-tabs-container"></div>
-
-    <!-- Escenario dinámico -->
     <div class="display-stage" id="service-stage"></div>
   </section>
 
@@ -293,15 +364,13 @@
   <footer class="corporate-footer">
     <div class="footer-container">
       
-      <!-- Datos de empresa -->
       <div class="footer-info">
         <h3 id="footer-empresa-nombre">NIVEL <span>9</span></h3>
         <p id="footer-lema-1" class="footer-highlight">Logística de Excelencia</p>
         <p id="footer-lema-2">Evolución Constante</p>
-        <p id="footer-base" class="footer-base">Base Operativa: Polo 52, Córdoba</p>
+        <p id="footer-base" class="footer-base">Presencia Operativa: Polo 52, Córdoba</p>
       </div>
 
-      <!-- Accesos directos -->
       <div class="footer-links-col">
         <span class="footer-col-title">ACCESOS DIRECTOS</span>
         <div class="footer-links">
@@ -319,11 +388,11 @@
 
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Nivel 9. Logística y Mudanzas Córdoba & Todo el País.</p>
+      <p>&copy; 2026 Nivel 9. Logística y Mudanzas Córdoba &amp; Todo el País.</p>
     </div>
   </footer>
 
-  <!-- PANEL MODAL DEL ENGRANAJE (CONFIGURACIÓN AMPLIADA) -->
+  <!-- PANEL MODAL DEL ENGRANAJE -->
   <div id="admin-modal" class="admin-modal-overlay">
     <div class="admin-modal-box">
       <div class="modal-header">
@@ -355,11 +424,10 @@
           <button class="adm-tab" data-adm-sec="sec-datos">📝 Pie</button>
         </div>
 
-        <!-- Fotos (Sin títulos molestos en pantalla) -->
         <div id="sec-fotos" class="adm-section active">
           <div class="form-group">
-            <label>Descripción interna de la foto</label>
-            <input type="text" id="new-img-title" placeholder="Ej: Operativo especial en ruta" />
+            <label>Referencia interna (No se muestra sobre la foto)</label>
+            <input type="text" id="new-img-title" placeholder="Uso interno" />
           </div>
           <div class="form-group">
             <label>División de destino</label>
@@ -377,20 +445,18 @@
           <button id="btn-save-image" class="btn-orange full-width">Guardar Imagen</button>
         </div>
 
-        <!-- Textos Web -->
         <div id="sec-textos" class="adm-section">
           <div class="form-group">
             <label>Título Principal (Hero)</label>
-            <input type="text" id="adm-hero-title" value="NIVEL 9 LOGÍSTICA DE EVOLUCIÓN" />
+            <input type="text" id="adm-hero-title" value="NIVEL 9 LOGÍSTICA DE EVOLUCIÓN." />
           </div>
           <div class="form-group">
             <label>Subtítulo / Descripción</label>
-            <textarea id="adm-hero-subtitle" rows="3">El transporte inteligente que tu negocio y tu vida necesitan...</textarea>
+            <textarea id="adm-hero-subtitle" rows="3">El transporte inteligente que tu negocio y tu vida necesitan. Distribución estratégica, gran presencia operativa en Polo 52, flota monitoreada, respuestas inmediatas y cobertura integral desde Córdoba a todo el país.</textarea>
           </div>
           <button id="btn-save-textos" class="btn-orange full-width">Actualizar Textos</button>
         </div>
 
-        <!-- Accesos Directos -->
         <div id="sec-accesos" class="adm-section">
           <div class="form-group">
             <label>Nombre del Acceso / Botón</label>
@@ -403,7 +469,6 @@
           <button id="btn-add-link" class="btn-orange full-width">Agregar Acceso Rápido</button>
         </div>
 
-        <!-- Datos pie -->
         <div id="sec-datos" class="adm-section">
           <div class="form-group">
             <label>Línea 1</label>
@@ -415,7 +480,7 @@
           </div>
           <div class="form-group">
             <label>Base Operativa</label>
-            <input type="text" id="adm-base" value="Base Operativa: Polo 52, Córdoba" />
+            <input type="text" id="adm-base" value="Presencia Operativa: Polo 52, Córdoba" />
           </div>
           <button id="btn-save-footer" class="btn-orange full-width">Guardar Cambios del Pie</button>
         </div>
@@ -426,18 +491,121 @@
   <script src="./js/config.js"></script>
   <script src="./js/motor.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const admTabs = document.querySelectorAll('.adm-tab');
-      admTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          admTabs.forEach(t => t.classList.remove('active'));
-          document.querySelectorAll('.adm-section').forEach(s => s.classList.remove('active'));
-          tab.classList.add('active');
-          const target = tab.getAttribute('data-adm-sec');
-          document.getElementById(target).classList.add('active');
+    (function() {
+      // Quita automáticamente los carteles naranjas sobre las fotos y corrige el texto de Polo 52
+      function depurarEscenario() {
+        const stage = document.getElementById('service-stage');
+        if (!stage) return;
+
+        const imgs = stage.querySelectorAll('img');
+        imgs.forEach(img => {
+          img.removeAttribute('title');
+          const parent = img.parentElement;
+          if (!parent) return;
+          Array.from(parent.children).forEach(child => {
+            if (child !== img && child.tagName !== 'IMG' && !child.querySelector('img')) {
+              child.classList.add('n9-hidden-photo-label');
+              child.style.setProperty('display', 'none', 'important');
+              child.textContent = '';
+            }
+          });
+          const grandParent = parent.parentElement;
+          if (grandParent && grandParent !== stage) {
+            Array.from(grandParent.children).forEach(child => {
+              if (child !== parent && !child.querySelector('img') && child.children.length === 0) {
+                child.classList.add('n9-hidden-photo-label');
+                child.style.setProperty('display', 'none', 'important');
+                child.textContent = '';
+              }
+            });
+          }
         });
+
+        const textNodes = stage.querySelectorAll('p, li, span, h3, h4');
+        textNodes.forEach(node => {
+          if (node.querySelector('img')) return;
+          let txt = node.innerHTML;
+          let modificado = false;
+          if (/desde nuestra nave en Polo 52/i.test(txt)) {
+            txt = txt.replace(/desde nuestra nave en Polo 52/gi, 'con fuerte presencia estratégica en Polo 52');
+            modificado = true;
+          }
+          if (/Nave log[íi]stica en Polo 52/i.test(txt)) {
+            txt = txt.replace(/Nave log[íi]stica en Polo 52/gi, 'Presencia operativa estratégica en Polo 52');
+            modificado = true;
+          }
+          if (/nave propia/i.test(txt)) {
+            txt = txt.replace(/nave propia/gi, 'gran presencia operativa');
+            modificado = true;
+          }
+          if (modificado) {
+            node.innerHTML = txt;
+          }
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        depurarEscenario();
+        setTimeout(depurarEscenario, 150);
+        setTimeout(depurarEscenario, 500);
+
+        const stage = document.getElementById('service-stage');
+        if (stage) {
+          const observer = new MutationObserver(() => depurarEscenario());
+          observer.observe(stage, { childList: true, subtree: true });
+        }
+
+        const admTabs = document.querySelectorAll('.adm-tab');
+        admTabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            admTabs.forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.adm-section').forEach(s => s.classList.remove('active'));
+            tab.classList.add('active');
+            const target = tab.getAttribute('data-adm-sec');
+            const sec = document.getElementById(target);
+            if (sec) sec.classList.add('active');
+          });
+        });
+
+        const btnSaveTextos = document.getElementById('btn-save-textos');
+        if (btnSaveTextos) {
+          btnSaveTextos.addEventListener('click', () => {
+            const newSub = document.getElementById('adm-hero-subtitle').value.trim();
+            const subEl = document.querySelector('.hero-subtitle');
+            if (subEl && newSub) {
+              subEl.textContent = newSub;
+              localStorage.setItem('n9_custom_hero_subtitle', newSub);
+              alert('Textos actualizados correctamente.');
+            }
+          });
+        }
+        const savedSub = localStorage.getItem('n9_custom_hero_subtitle');
+        if (savedSub) {
+          const subEl = document.querySelector('.hero-subtitle');
+          if (subEl) subEl.textContent = savedSub;
+        }
+
+        const btnAddLink = document.getElementById('btn-add-link');
+        if (btnAddLink) {
+          btnAddLink.addEventListener('click', () => {
+            const name = document.getElementById('adm-link-name').value.trim();
+            const url = document.getElementById('adm-link-url').value.trim();
+            const container = document.querySelector('.footer-links');
+            if (name && url && container) {
+              const a = document.createElement('a');
+              a.href = url;
+              a.target = '_blank';
+              a.className = 'footer-large-link';
+              a.innerHTML = '<span class="link-bullet">▶</span> ' + name;
+              container.appendChild(a);
+              document.getElementById('adm-link-name').value = '';
+              document.getElementById('adm-link-url').value = '';
+              alert('Acceso directo agregado.');
+            }
+          });
+        }
       });
-    });
+    })();
   </script>
 </body>
 </html>
